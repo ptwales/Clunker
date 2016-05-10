@@ -14,25 +14,25 @@ namespace Clunker
 
 	abstract class AbstractApplicable : Applicable
 	{ 
-		object apply(params object[] args) {
+		public object apply(params object[] args) {
 			return applyOnArray(args);
 		}
 
-		abstract object applyOnArray(object[] args);
+		public abstract object applyOnArray(object[] args);
 
-		Applicable partial(params object[] partialArgs) {
+		public Applicable partial(params object[] partialArgs) {
 			return asPartial(partialArgs);
 		}
 
-		Applicable asPartial(object[] partialArgs) {
-			return new Partial(partialArgs);
+		public Applicable asPartial(object[] partialArgs) {
+			return new Partial(this, partialArgs);
 		}
 
-		Applicable compose(Applicable inner) {
+		public Applicable compose(Applicable inner) {
 			return new Composed(this, inner);
 		}
 
-		Applicable andThen(Applicable outer) {
+		public Applicable andThen(Applicable outer) {
 			return new Composed(outer, this);
 		}
 	}
@@ -47,7 +47,7 @@ namespace Clunker
 			_outer = outer;
 		}
 
-		override object applyOnArray(object[] args) {
+		public override object applyOnArray(object[] args) {
 			var x = _inner.applyOnArray(args);
 			return _outer.apply (x);
 		}
@@ -56,15 +56,39 @@ namespace Clunker
 	class Partial : AbstractApplicable
 	{
 		private Applicable _function;
-		private object[] _args;
+		private object[] _partialArgs;
+		private int _argCount;
 
-		public Partial(Applicable function, object[] args) {
+		public Partial(Applicable function, object[] partialArgs) {
 			_function = function;
-			_args = args;
+			_partialArgs = partialArgs;
+			_argCount = _partialArgs.Length;
 		}
 
-		override object applyOnArray(object[] args) {
-			return null;
+		public override object applyOnArray(object[] args) {
+
+			object[] usedArgs = new object[_argCount];
+			var a = 0;
+
+			for (int p = 0; p < _argCount; ++p) {
+
+				if (_partialArgs [p] == null) {
+					usedArgs [p] = args [a];
+					++a;
+				} else {
+					usedArgs [p] = _partialArgs [p];
+				}
+			}
+
+			if (a == args.Length - 1) {
+				return _function.applyOnArray (usedArgs);
+			} else {
+				var message = string.Format("Too many arguments received.  Expected: {0}, recieved: {1}",
+					a + 1,
+					args.Length);
+				throw new ArgumentException (message, "args");
+			}
+				
 		}
 	}
 }
