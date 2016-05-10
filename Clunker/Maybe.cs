@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Clunker
 {
-    interface Maybe
+    public interface Maybe
     {
 		Maybe maybe (object boxed);
 		Maybe some (object boxed);
@@ -13,6 +11,8 @@ namespace Clunker
 		bool isNone ();
 		object getItem ();
 		object getOrElse (object other);
+		Maybe map(Applicable f);
+		Maybe flatMap(Applicable f);
 	}
 
 	abstract class AbstractMaybe : Maybe
@@ -47,6 +47,8 @@ namespace Clunker
 		public abstract bool isNone ();
 		public abstract object getItem ();
 		public abstract object getOrElse (object other);
+		public abstract Maybe map(Applicable f);
+		public abstract Maybe flatMap(Applicable f);
 	}
 
 	class Some : AbstractMaybe
@@ -79,6 +81,15 @@ namespace Clunker
 		public override object getOrElse(object other) {
 			return _boxed;
 		}
+
+		public override Maybe map(Applicable f) {
+			var result = f.apply (_boxed);
+			return new Some (result);
+		}
+
+		public override Maybe flatMap(Applicable f) {
+			return f.apply (_boxed);
+		}
     }
 
 	class None : AbstractMaybe 
@@ -101,6 +112,14 @@ namespace Clunker
 
 		public override object getOrElse(object other) { 
 			return other; 
+		}
+
+		public override Maybe map (Applicable f) {
+			return new None ();
+		}
+
+		public override Maybe flatMap (Applicable f) {
+			return new None ();
 		}
 
 	}
