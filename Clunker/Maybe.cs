@@ -2,7 +2,7 @@
 
 namespace Clunker
 {
-    public interface Maybe
+    public interface Maybe : Monadic
     {
 		Maybe maybe (object boxed);
 		Maybe some (object boxed);
@@ -11,8 +11,6 @@ namespace Clunker
 		bool isNone ();
 		object getItem ();
 		object getOrElse (object other);
-		Maybe map(Applicable f);
-		Maybe flatMap(Applicable f);
 	}
 
 	abstract class AbstractMaybe : Maybe
@@ -47,8 +45,8 @@ namespace Clunker
 		public abstract bool isNone ();
 		public abstract object getItem ();
 		public abstract object getOrElse (object other);
-		public abstract Maybe map(Applicable f);
-		public abstract Maybe flatMap(Applicable f);
+		public abstract Monadic map(Applicable f);
+		public abstract Monadic flatMap(Applicable f);
 	}
 
 	class Some : AbstractMaybe
@@ -82,13 +80,13 @@ namespace Clunker
 			return _boxed;
 		}
 
-		public override Maybe map(Applicable f) {
+		public override Monadic map(Applicable f) {
 			var result = f.apply (_boxed);
 			return new Some (result);
 		}
 
-		public override Maybe flatMap(Applicable f) {
-			return f.apply (_boxed);
+		public override Monadic flatMap(Applicable f) {
+			return (Maybe) f.apply (_boxed);
 		}
     }
 
@@ -114,11 +112,11 @@ namespace Clunker
 			return other; 
 		}
 
-		public override Maybe map (Applicable f) {
+		public override Monadic map (Applicable f) {
 			return new None ();
 		}
 
-		public override Maybe flatMap (Applicable f) {
+		public override Monadic flatMap (Applicable f) {
 			return new None ();
 		}
 
