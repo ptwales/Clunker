@@ -31,5 +31,35 @@ namespace Clunker
 		Maybe findLast(Applicable pred);
 		int countWhere(Applicable pred);
 	}
+
+	abstract class AbstractLinear : Linear 
+	{
+		// fundamentals
+		public abstract int lowerBound();
+		public abstract int upperBound();
+		public abstract int size();
+		public abstract object item(int index);
+
+		// for those car/cdr types
+		public abstract object head();
+		public abstract Linear tail();
+		public abstract Linear init();
+		public abstract object last();
+		public abstract Maybe maybeHead();
+		public abstract Maybe maybeLast();
+
+		// Conversions
+		public abstract object[] toArray();
+		// buildable
+
+		// functional idioms
+		public abstract Maybe indexWhere(Applicable pred);
+		public abstract Maybe indexOf(object val);
+		public abstract Maybe lastIndexWhere(Applicable pred);
+		public abstract Maybe lastIndexOf(object val);
+		public abstract Maybe find(Applicable pred);
+		public abstract Maybe findLast(Applicable pred);
+		public abstract int countWhere(Applicable pred);
+	}
 }
 
