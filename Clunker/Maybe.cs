@@ -4,46 +4,104 @@ using System.Text;
 
 namespace Clunker
 {
-    public class Maybe
+    interface Maybe
     {
+		Maybe maybe (object boxed);
+		Maybe some (object boxed);
+		Maybe none ();
+		bool isSome ();
+		bool isNone ();
+		object getItem ();
+		object getOrElse (object other);
+	}
+
+	abstract class AbstractMaybe : Maybe
+	{
+		/// <summary>
+		/// Initializes a new instance of the <see cref="Clunker.Maybe"/> class.
+		/// Maybe will be none if object is null and some otherwise
+		/// </summary>
+		/// <param name="boxed">Object to contain, may be null.</param>
+		public Maybe maybe(object boxed) {
+			if (boxed != null) {
+				return new Some (boxed);
+			} else {
+				return new None ();
+			}
+		}
+
+		/// <summary>
+		/// Returns a Maybe that contain's a non-null object.
+		/// Will error if null.
+		/// </summary>
+		/// <param name="boxed">Non-null object to contain.</param>
+		public Maybe some(object boxed) {
+			return new Some (boxed);
+		}
+
+		public Maybe none() {
+			return new None ();
+		}
+
+		public abstract bool isSome ();
+		public abstract bool isNone ();
+		public abstract object getItem ();
+		public abstract object getOrElse (object other);
+	}
+
+	class Some : AbstractMaybe
+	{
+		/// <summary>
+		/// Single value contained by the Maybe object.
+		/// </summary>
         private object _boxed;
 
-        public Maybe(object boxed)
-        {
-            _boxed = boxed;
-        }
+		public Some(object boxed) {
+			if (boxed != null) {
+				_boxed = boxed;
+			} else {
+				throw new ArgumentNullException("boxed", "Cannot create some of null object, use maybe instead.");
+			}
+		}
 
-        public Maybe some(object boxed)
-        {
-            if (boxed != null)
-            {
-                return new Maybe(boxed);
-            }
-            else
-            {
-                throw new ArgumentNullException("boxed", "Cannot create some of null object, use maybe instead.");
-            }
-        }
+		public override bool isSome() {
+			return true;
+		}
 
-        public Maybe none()
-        {
-            return new Maybe(null);
-        }
+		public override bool isNone() {
+			return false;
+		}
 
-        public Maybe maybe(object unknown)
-        {
-            return new Maybe(unknown);
-        }
+		public override object getItem() {
+			return _boxed;
+		}
 
-        public bool isSome()
-        {
-            return (_boxed != null);
-        }
-
-        public bool isNone()
-        {
-            return !isSome();
-        }
-
+		public override object getOrElse(object other) {
+			return _boxed;
+		}
     }
+
+	class None : AbstractMaybe 
+	{
+		public None() {
+		  // nothing to do.	
+		}
+
+		public override bool isSome() {
+			return false;
+		}
+
+		public override bool isNone() {
+			return true;
+		}
+
+		public override object getItem() {
+			throw new NullReferenceException ("Calling getItem on None object");
+		}
+
+		public override object getOrElse(object other) { 
+			return other; 
+		}
+
+	}
 }
