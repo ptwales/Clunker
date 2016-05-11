@@ -48,7 +48,7 @@
     <Compile Include="Monadic.cs" />
     <Compile Include="Linear.cs" />
     <Compile Include="Showable.cs" />
-    <Compile Include="OnArgs.cs" />
+    <Compile Include="CallByName.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
