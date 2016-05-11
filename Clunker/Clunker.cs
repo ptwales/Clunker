@@ -2,11 +2,11 @@
 
 namespace Clunker
 {
-	public class Clunker
-	{
-		public Clunker () {}
-		public Maybe maybe = new None();
+    public class Clunker
+    {
+        public Clunker() {}
+        public Maybe maybe = new None();
 
-	}
+    }
 }
 

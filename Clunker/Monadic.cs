@@ -2,10 +2,10 @@
 
 namespace Clunker
 {
-	public interface Monadic
-	{
-		Monadic map(Applicable f);
-		Monadic flatMap(Applicable f);
-	}
+    public interface Monadic
+    {
+        Monadic map(Applicable f);
+        Monadic flatMap(Applicable f);
+    }
 }
 
