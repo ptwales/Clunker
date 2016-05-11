@@ -13,36 +13,61 @@ namespace Clunker
 	// Some of the most complicated code in VBEX was defShow.bas,
 	// but if C# will do all that jazz for free then why waste my time,
 	// or create difficult code to read.
-	abstract class AbstractShowable: Showable
+	static class DefShow
 	{
-        
-		protected string showBySequence(IEnumerable<object> members)
+		public static string show(object obj)
+		{
+			return showElement(obj);
+		}
+
+		public static string showBySequence(object obj, IEnumerable<object> members)
 		{
 			var shownMembers = showSequence(members);
-			var shownComposition = string.Join(", ", shownMembers);
-			var typeName = this.GetType().ToString();
-			return string.Format("{0}({1})", typeName, shownComposition);
+			var typeName = obj.GetType().ToString();
+			return string.Format("{0}({1})", typeName, shownMembers);
 		}
 
-		protected string showParameters(params object[] members)
+		public static string showParameters(object obj, params object[] members)
 		{
-			return showBySequence(members);
+			return showBySequence(obj, members);
 		}
 
-		protected IEnumerable<string> showSequence(IEnumerable<object> sequence)
+		private static string showSequence(IEnumerable<object> sequence)
 		{
-			return from element in sequence
-			                select showElement(element);
+			var elements = from element in sequence
+			               select showElement(element);
+			return string.Join(", ", elements);
 		}
 
-		protected string showElement(object element)
+		private static string showElement(object element)
 		{
-			return element.ToString();
+			if (isArray(element)) {
+				return showArray((object[]) element);
+			} else if (isShowable(element)) {
+				Showable s = (Showable)element;
+				return s.show();
+			} else {
+				return element.ToString();
+			}
 		}
 
-		public string show()
+		private static string showArray(object[] array)
 		{
-			return this.ToString();
+			var shownMembers = showSequence(array);
+			var typeName = array.GetType().GetElementType().ToString();
+			return string.Format("{0}[{1}]", typeName, shownMembers);
+		}
+
+		private static bool isShowable(object element) 
+		{
+			Type showType = typeof(Showable);
+			Type elType = element.GetType();
+			return showType.IsAssignableFrom(elType);
+		}
+
+		private static bool isArray(object element)
+		{
+			return element.GetType().IsArray;
 		}
 	}
 

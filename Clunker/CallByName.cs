@@ -3,10 +3,11 @@ using System.Reflection;
 
 namespace Clunker
 {
-	class OnArgs : AbstractApplicable
+	class OnArgs : AbstractApplicable, Showable
 	{
 		private object _obj;
 		private MethodInfo _method;
+		private string _methodName;
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="Clunker.OnArgs"/> 
@@ -17,6 +18,7 @@ namespace Clunker
 		public OnArgs(object obj, string method)
 		{
 			Type objType = obj.GetType();
+			_methodName = method;
 			_method = objType.GetMethod(method);
 			_obj = obj;
 		}
@@ -32,9 +34,14 @@ namespace Clunker
 		{
 			return _method.Invoke(_obj, args);
 		}
+
+		public string show()
+		{
+			return DefShow.showParameters(this, _obj, _methodName);
+		}
 	}
 
-	class OnObject : AbstractApplicable
+	class OnObject : AbstractApplicable, Showable
 	{
 		private object[] _args;
 		private string _method;
@@ -66,6 +73,10 @@ namespace Clunker
 			return method.Invoke(obj, _args);
 		}
 
+		public string show()
+		{
+			return DefShow.showParameters(this, _method, _args);
+		}
 	}
 }
 

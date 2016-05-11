@@ -132,7 +132,7 @@ namespace Clunker
 		/// <returns>A string representing this object.</returns>
 		public string show()
 		{
-			return "Some(" + _boxed + ")";
+			return DefShow.showParameters(this, _boxed);
 		}
 	}
 
