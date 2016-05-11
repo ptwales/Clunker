@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Runtime.InteropServices;
 
 namespace Clunker
 {
-    public interface Maybe : Monadic
+   
+    public interface Maybe : Monadic, Showable
     {
         Maybe maybe(object boxed);
         Maybe some(object boxed);
@@ -47,8 +49,10 @@ namespace Clunker
         public abstract object getOrElse(object other);
         public abstract Monadic map(Applicable f);
         public abstract Monadic flatMap(Applicable f);
+        public abstract string show();
     }
 
+    [ClassInterface(ClassInterfaceType.AutoDual)]
     class Some : AbstractMaybe
     {
         /// <summary>
@@ -88,8 +92,13 @@ namespace Clunker
         public override Monadic flatMap(Applicable f) {
             return (Maybe) f.apply (_boxed);
         }
+
+        public override string show() {
+            return "Some(" + _boxed + ")";
+        }
     }
 
+    [ClassInterface(ClassInterfaceType.AutoDual)]
     class None : AbstractMaybe 
     {
         public None() {
@@ -120,5 +129,8 @@ namespace Clunker
             return new None ();
         }
 
+        public override string show() {
+            return "None()";
+        }
     }
 }
