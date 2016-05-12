@@ -166,7 +166,7 @@ namespace Clunker
 		}
 
 		/// <summary>
-		/// Throws a <c></c>NullReferenceException</c>
+		/// Throws a <c>NullReferenceException</c>
 		/// </summary>
 		/// <returns>Nothing, will always throw an exception.</returns>
 		public object getItem()

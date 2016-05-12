@@ -35,6 +35,9 @@ namespace Clunker
 			return _method.Invoke(_obj, args);
 		}
 
+		/// <summary>
+		/// Show this instance.
+		/// </summary>
 		public string show()
 		{
 			return DefShow.showParameters(this, _obj, _methodName);
@@ -73,6 +76,9 @@ namespace Clunker
 			return method.Invoke(obj, _args);
 		}
 
+		/// <summary>
+		/// Show this instance.
+		/// </summary>
 		public string show()
 		{
 			return DefShow.showParameters(this, _method, _args);

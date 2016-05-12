@@ -43,6 +43,12 @@ namespace Clunker
 		{
 			return new OnArgs(obj, method);
 		}
+
+		public Applicable onObject(string method, params object[] args)
+		{
+			return new OnObject(method, args);
+		}
+			
 	}
 }
 

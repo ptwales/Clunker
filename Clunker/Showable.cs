@@ -6,6 +6,9 @@ namespace Clunker
 {
 	public interface Showable
 	{
+		/// <summary>
+		/// Show this instance as a string.
+		/// </summary>
 		string show();
 	}
 
