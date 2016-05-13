@@ -2,14 +2,14 @@
 
 namespace Clunker
 {
-	public interface Monadic
+	public interface Monadic<Monad>
 	{
 		/// <summary>
 		/// Return a new monad where all elements are the results
 		/// of applying f to the elements of this monad.
 		/// </summary>
 		/// <param name="f">Function to apply to all elements</param>
-		Monadic map(Applicable f);
+		Monad map(Applicable f);
 
 		/// <summary>
 		/// Return a new monad where all elements are the elements of 
@@ -17,7 +17,7 @@ namespace Clunker
 		/// this monad.
 		/// </summary>
 		/// <param name="f">Function that must return a monad.</param>
-		Monadic flatMap(Applicable f);
+		Monad flatMap(Applicable f);
 	}
 }
 

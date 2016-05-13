@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 namespace Clunker
 {
    
-	public interface Maybe : Monadic, Showable
+	public interface Maybe : Monadic<Maybe>, Showable
 	{
 		/// <summary>
 		/// Returns <c>true</c> if is <see cref="Clunker.Some"/>,
@@ -38,8 +38,7 @@ namespace Clunker
 		/// <param name="other">Other.</param>
 		object getOrElse(object other);
 	}
-
-	[ClassInterface(ClassInterfaceType.AutoDual)]
+		
 	class Some : Maybe
 	{
 		/// <summary>
@@ -106,7 +105,7 @@ namespace Clunker
 		/// </summary>
 		/// <returns><c>Some(f.apply(boxed))</c></returns>
 		/// <param name="f">The function to apply</param>
-		public Monadic map(Applicable f)
+		public Maybe map(Applicable f)
 		{
 			var result = f.apply(_boxed);
 			return new Some(result);
@@ -121,9 +120,9 @@ namespace Clunker
 		/// of applying f to the contained object.</returns>
 		/// <param name="f">The function to apply.  It must return a 
 		/// <see cref="Clunker.Maybe"/></param>
-		public Monadic flatMap(Applicable f)
+		public Maybe flatMap(Applicable f)
 		{
-			return (Maybe)f.apply(_boxed);
+			return (Maybe) f.apply(_boxed);
 		}
 
 		/// <summary>
@@ -135,8 +134,7 @@ namespace Clunker
 			return DefShow.showParameters(this, _boxed);
 		}
 	}
-
-	[ClassInterface(ClassInterfaceType.AutoDual)]
+		
 	class None : Maybe
 	{
 		/// <summary>
@@ -189,7 +187,7 @@ namespace Clunker
 		/// </summary>
 		/// <param name="f">Function to apply to the contained object if this
 		/// was a <see cref="Clunker.Some"/>.</param>
-		public Monadic map(Applicable f)
+		public Maybe map(Applicable f)
 		{
 			return new None();
 		}
@@ -199,7 +197,7 @@ namespace Clunker
 		/// </summary>
 		/// <param name="f">Function to apply to the contained object if this
 		/// was a <see cref="Clunker.Some"/>.</param>
-		public Monadic flatMap(Applicable f)
+		public Maybe flatMap(Applicable f)
 		{
 			return new None();
 		}
