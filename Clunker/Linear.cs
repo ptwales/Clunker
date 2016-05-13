@@ -138,31 +138,52 @@ namespace Clunker
 
 	abstract class AbstractLinear : Linear
 	{
-		
-		public abstract int lowerBound();
-
-		public abstract int upperBound();
-
 		public int size()
 		{
 			return upperBound() - lowerBound() + 1;
 		}
-
-		public abstract object item(int index);
 
 		public object head()
 		{
 			return item(lowerBound());
 		}
 
-		public abstract Linear tail();
-
-		public abstract Linear init();
-
 		public object last()
 		{
 			return item(upperBound());
 		}
+
+		public Maybe indexOf(object val)
+		{
+			Splat eq = a => a[0] == val;
+			return indexWhere(new InternalDelegate(eq));
+		}
+
+		public Maybe lastIndexOf(object val)
+		{
+			Splat eq = a => a[0] == val;
+			return lastIndexWhere(new InternalDelegate(eq));
+		}
+
+		public Maybe find(Applicable pred)
+		{
+			return indexWhere(pred).map(new OnArgs(this, "item"));
+		}
+
+		public Maybe findLast(Applicable pred)
+		{
+			return lastIndexWhere(pred).map(new OnArgs(this, "item"));
+		}
+
+		public abstract int lowerBound();
+
+		public abstract int upperBound();
+
+		public abstract object item(int index);
+
+		public abstract Linear tail();
+
+		public abstract Linear init();
 
 		public abstract Maybe maybeHead();
 
@@ -172,17 +193,10 @@ namespace Clunker
 
 		public abstract Maybe indexWhere(Applicable pred);
 
-		public abstract Maybe indexOf(object val);
-
 		public abstract Maybe lastIndexWhere(Applicable pred);
 
-		public abstract Maybe lastIndexOf(object val);
-
-		public abstract Maybe find(Applicable pred);
-
-		public abstract Maybe findLast(Applicable pred);
-
 		public abstract int countWhere(Applicable pred);
+
 	}
 }
 
