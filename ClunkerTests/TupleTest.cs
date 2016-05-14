@@ -12,7 +12,7 @@ namespace ClunkerTests
         Factory f = new Factory();
 
         [Test()]
-        public void emptyTuple()
+        public void emptyPack()
         {
             Tuple t = f.pack();
             Assert.AreEqual(0, t.size());
@@ -20,7 +20,7 @@ namespace ClunkerTests
         }
 
         [Test()]
-        public void singleTuple()
+        public void singlePack()
         {
             Tuple t = f.pack(13);
             Assert.AreEqual(1, t.size());
@@ -33,11 +33,35 @@ namespace ClunkerTests
         {
             Tuple t = f.pack(13);
           
-            object[] target = new object[1] { 0 };
-            t.unpack(target);
+            object target;
+            t.unpack(out target);
+        
+            Assert.AreEqual(13, target);
+            Assert.AreEqual(target, t.item(0));
+        }
 
-            Assert.AreEqual(new object[] { 13 }, target);
-            Assert.AreEqual(target[0], t.item(0));
+        [Test()]
+        public void multiplePack()
+        {
+            Tuple t = f.pack(2, 4, 6);
+            Assert.AreEqual(3, t.size());
+            Assert.AreEqual(6, t.item(2));
+
+            t = f.pack(new object[3]{ 1, 3, 5 });
+            Assert.AreEqual(3, t.size());
+            Assert.AreEqual(5, t.item(2));
+        }
+
+        [Test()]
+        public void multipleUnPack()
+        {
+            Tuple t = f.pack(2, 4, 6);
+            object x, y, z;
+            t.unpack(out x, out y,out z);
+        
+            Assert.AreEqual(2, x);
+            Assert.AreEqual(4, y);
+            Assert.AreEqual(6, z);
         }
     }
 }
