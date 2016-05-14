@@ -22,6 +22,13 @@ namespace Clunker
 		int size();
 
 		/// <summary>
+		/// Check if the object has no elements.
+		/// </summary>
+		/// <returns><c>true</c>, if the object is empty <c>false</c>
+		///  otherwise.</returns>
+		bool isEmpty();
+
+		/// <summary>
 		/// Return the item at the index.
 		/// </summary>
 		/// <param name="index">Index of the sought item.</param>
@@ -135,68 +142,6 @@ namespace Clunker
 		/// <param name="pred">Predicate to check.</param>
 		int countWhere(Applicable pred);
 	}
-
-	abstract class AbstractLinear : Linear
-	{
-		public int size()
-		{
-			return upperBound() - lowerBound() + 1;
-		}
-
-		public object head()
-		{
-			return item(lowerBound());
-		}
-
-		public object last()
-		{
-			return item(upperBound());
-		}
-
-		public Maybe indexOf(object val)
-		{
-			Splat eq = a => a[0] == val;
-			return indexWhere(new InternalDelegate(eq));
-		}
-
-		public Maybe lastIndexOf(object val)
-		{
-			Splat eq = a => a[0] == val;
-			return lastIndexWhere(new InternalDelegate(eq));
-		}
-
-		public Maybe find(Applicable pred)
-		{
-			return indexWhere(pred).map(new OnArgs(this, "item"));
-		}
-
-		public Maybe findLast(Applicable pred)
-		{
-			return lastIndexWhere(pred).map(new OnArgs(this, "item"));
-		}
-
-		public abstract int lowerBound();
-
-		public abstract int upperBound();
-
-		public abstract object item(int index);
-
-		public abstract Linear tail();
-
-		public abstract Linear init();
-
-		public abstract Maybe maybeHead();
-
-		public abstract Maybe maybeLast();
-
-		public abstract object[] toArray();
-
-		public abstract Maybe indexWhere(Applicable pred);
-
-		public abstract Maybe lastIndexWhere(Applicable pred);
-
-		public abstract int countWhere(Applicable pred);
-
-	}
+		
 }
 

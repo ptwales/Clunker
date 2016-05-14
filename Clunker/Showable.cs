@@ -16,7 +16,7 @@ namespace Clunker
 	// Some of the most complicated code in VBEX was defShow.bas,
 	// but if C# will do all that jazz for free then why waste my time,
 	// or create difficult code to read.
-	static class DefShow
+	public static class DefShow
 	{
 		public static string show(object obj)
 		{
