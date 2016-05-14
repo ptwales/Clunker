@@ -39,6 +39,8 @@ namespace ClunkerTests
                 Assert.Fail("Raised unknown exception: " + e.ToString());
             }
         }
+
+        // maps and flat map might be extracted to a battery
     }
 }
 
