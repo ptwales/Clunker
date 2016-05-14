@@ -48,19 +48,19 @@ namespace Clunker.Collections
             return _list.ToArray();
         }
 
-        public override Maybe indexWhere(Applicable pred)
+        public override Maybe indexWhere(Func pred)
         {
             var result = _list.FindIndex(x => (bool) pred.apply(x));
             return findResult(result, -1);
         }
 
-        public override Maybe lastIndexWhere(Applicable pred)
+        public override Maybe lastIndexWhere(Func pred)
         {
             var result = _list.FindLastIndex(x => (bool) pred.apply(x));
             return findResult(result, -1);
         }
 
-        public override int countWhere(Applicable pred)
+        public override int countWhere(Func pred)
         {
             return _list.Count(x => (bool) pred.apply(x));
         }

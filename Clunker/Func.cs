@@ -2,7 +2,7 @@
 
 namespace Clunker
 {
-	public interface Applicable
+	public interface Func
 	{
 		/// <summary>
 		/// Varag wrapper to <see cref="Clunker.Applicable.applyOnArray"/>
@@ -34,7 +34,7 @@ namespace Clunker
 		/// <returns>A <see cref="Clunker.Composed"/> , where this function is 
 		/// the outer function.</returns>
 		/// <param name="inner">Function to compose.</param>
-		Applicable compose(Applicable inner);
+		Func compose(Func inner);
 
 		/// <summary>
 		/// Compose this function inside another function.
@@ -44,14 +44,14 @@ namespace Clunker
 		/// <returns>A Composed where this function is the inner function.
 		/// </returns>
 		/// <param name="outer">Function with this will be composed.</param>
-		Applicable andThen(Applicable outer);
+		Func andThen(Func outer);
 
 		/// <summary>
 		/// Vararg wrapper for <see cref="Clunker.Applicable.asPartial"/>
 		/// </summary>
 		/// <returns>A partially applied function.</returns>
 		/// <param name="partialArgs">Partial arguments as varargs</param>
-		Applicable partial(params object[] partialArgs);
+		Func partial(params object[] partialArgs);
 
 		/// <summary>
 		/// Create a <see cref="Clunker.Partial"/> function with stored 
@@ -67,10 +67,10 @@ namespace Clunker
 		/// <returns>A partially applied function.</returns>
 		/// <param name="partialArgs">Some arguments with <c>null</c> for 
 		/// missing args.</param>
-		Applicable asPartial(object[] partialArgs);
+		Func asPartial(object[] partialArgs);
 	}
 
-	abstract class AbstractApplicable : Applicable
+	abstract class AbstractFunc : Func
 	{
 		/// <summary>
 		/// Varag wrapper to <see cref="Clunker.Applicable.applyOnArray"/>
@@ -105,7 +105,7 @@ namespace Clunker
 		/// <returns>A <see cref="Clunker.Composed"/> , where this function is 
 		/// the outer function.</returns>
 		/// <param name="inner">Function to compose.</param>
-		public Applicable compose(Applicable inner)
+		public Func compose(Func inner)
 		{
 			return new Composed(this, inner);
 		}
@@ -118,7 +118,7 @@ namespace Clunker
 		/// <returns>A Composed where this function is the inner function.
 		/// </returns>
 		/// <param name="outer">Function with this will be composed.</param>
-		public Applicable andThen(Applicable outer)
+		public Func andThen(Func outer)
 		{
 			return outer.compose(this);
 		}
@@ -128,7 +128,7 @@ namespace Clunker
 		/// </summary>
 		/// <returns>A partially applied function.</returns>
 		/// <param name="partialArgs">Partial arguments as varargs</param>
-		public Applicable partial(params object[] partialArgs)
+		public Func partial(params object[] partialArgs)
 		{
 			return asPartial(partialArgs);
 		}
@@ -147,16 +147,16 @@ namespace Clunker
 		/// <returns>A partially applied function.</returns>
 		/// <param name="partialArgs">Some arguments with <c>null</c> for 
 		/// missing args.</param>
-		public Applicable asPartial(object[] partialArgs)
+		public Func asPartial(object[] partialArgs)
 		{
 			return new Partial(this, partialArgs);
 		}
 	}
 
-	class Composed : AbstractApplicable
+	class Composed : AbstractFunc
 	{
-		private Applicable _inner;
-		private Applicable _outer;
+		private Func _inner;
+		private Func _outer;
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="Clunker.Composed"/> 
@@ -164,7 +164,7 @@ namespace Clunker
 		/// </summary>
 		/// <param name="outer">Function to apply last.</param>
 		/// <param name="inner">Function to apply first.</param>
-		public Composed(Applicable outer, Applicable inner)
+		public Composed(Func outer, Func inner)
 		{
 			_inner = inner;
 			_outer = outer;
@@ -183,9 +183,9 @@ namespace Clunker
 		}
 	}
 
-	class Partial : AbstractApplicable
+	class Partial : AbstractFunc
 	{
-		private Applicable _function;
+		private Func _function;
 		private object[] _partialArgs;
 		private int _argCount;
 
@@ -196,7 +196,7 @@ namespace Clunker
 		/// <param name="function">Function to preset some arguments.</param>
 		/// <param name="partialArgs">Partial arguments, use <c>null</c> for
 		/// missing arguments.</param>
-		public Partial(Applicable function, object[] partialArgs)
+		public Partial(Func function, object[] partialArgs)
 		{
 			_function = function;
 			_partialArgs = partialArgs;

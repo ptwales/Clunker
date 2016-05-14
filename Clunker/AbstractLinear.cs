@@ -55,12 +55,12 @@ namespace Clunker.Collections
             return lastIndexWhere(new InternalDelegate(eq));
         }
 
-        public Maybe find(Applicable pred)
+        public Maybe find(Func pred)
         {
             return indexWhere(pred).map(new OnArgs(this, "item"));
         }
 
-        public Maybe findLast(Applicable pred)
+        public Maybe findLast(Func pred)
         {
             return lastIndexWhere(pred).map(new OnArgs(this, "item"));
         }
@@ -86,11 +86,11 @@ namespace Clunker.Collections
 
         public abstract object[] toArray();
 
-        public abstract Maybe indexWhere(Applicable pred);
+        public abstract Maybe indexWhere(Func pred);
 
-        public abstract Maybe lastIndexWhere(Applicable pred);
+        public abstract Maybe lastIndexWhere(Func pred);
 
-        public abstract int countWhere(Applicable pred);
+        public abstract int countWhere(Func pred);
 
     }
 }

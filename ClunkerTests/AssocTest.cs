@@ -22,7 +22,7 @@ namespace ClunkerTests
         public void memeoConstruction()
         {
             Assoc a = f.assoc('k', 'v');
-            Applicable op = f.onObject("key");
+            Func op = f.onObject("key");
             Assoc b = f.memeo(op, a);
             Assert.AreEqual('k', b.value());
         }

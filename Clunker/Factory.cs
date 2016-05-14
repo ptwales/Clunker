@@ -26,7 +26,7 @@ namespace Clunker
 		/// </summary>
 		/// <param name="op">Function to apply to the key to get the value.</param>
 		/// <param name="key">Key.</param>
-		public Assoc memeo(Applicable op, object key)
+		public Assoc memeo(Func op, object key)
 		{
 			return new Assoc(key, op.apply(key));
 		}
@@ -70,7 +70,7 @@ namespace Clunker
 		/// <returns>A new <see cref="Clunker.OnArgs"/> object.</returns>
 		/// <param name="obj">Object to call on.</param>
 		/// <param name="method">Name of method to call.</param>
-		public Applicable onArgs(object obj, string method)
+		public Func onArgs(object obj, string method)
 		{
 			return new OnArgs(obj, method);
 		}
@@ -81,7 +81,7 @@ namespace Clunker
 		/// <returns>A new <see cref="Clunker.OnObject"/>.</returns>
 		/// <param name="method">Name of method to call</param>
 		/// <param name="args">Arguments to call with the method.</param>
-		public Applicable onObject(string method, params object[] args)
+		public Func onObject(string method, params object[] args)
 		{
 			return new OnObject(method, args);
 		}
