@@ -7,21 +7,23 @@ namespace ClunkerTests
     [TestFixture()]
     public class AssocTest
     {
+        private Factory f = new Factory();
+
         [Test()]
-        public void ConstructionTest()
+        public void construction()
         {
-            Assoc a = new Assoc("key", "value");
+            Assoc a = f.assoc("key", "value");
             Assert.AreEqual("key", a.key());
             Assert.AreEqual("value", a.value());
+            Assert.AreEqual("key -> value", a.show());
         }
 
         [Test()]
-        public void OperationalTest()
+        public void memeoConstruction()
         {
-            Factory f = new Factory();
-            Assoc a = new Assoc('k', 'v');
+            Assoc a = f.assoc('k', 'v');
             Applicable op = f.onObject("key");
-            Assoc b = new Assoc(op, a);
+            Assoc b = f.memeo(op, a);
             Assert.AreEqual('k', b.value());
         }
     }

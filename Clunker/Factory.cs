@@ -11,6 +11,27 @@ namespace Clunker
 		}
 
 		/// <summary>
+		/// Creates a new instance of an <see cref="Clunker.Assoc"/> class.
+		/// </summary>
+		/// <param name="key">Key.</param>
+		/// <param name="val">Value.</param>
+		public Assoc assoc(object key, object val)
+		{
+			return new Assoc(key, val);
+		}
+
+		/// <summary>
+		/// Initializes a new instance of the <see cref="Clunker.Assoc"/> class,
+		/// where the value is the result of op applied to the key.
+		/// </summary>
+		/// <param name="op">Function to apply to the key to get the value.</param>
+		/// <param name="key">Key.</param>
+		public Assoc memeo(Applicable op, object key)
+		{
+			return new Assoc(key, op.apply(key));
+		}
+
+		/// <summary>
 		/// Initializes a new instance of the <see cref="Clunker.Maybe"/> class.
 		/// Maybe will be none if object is null and some otherwise
 		/// </summary>
@@ -37,6 +58,7 @@ namespace Clunker
 		/// <summary>
 		/// Creates an instance of a <see cref="Clunker.None"/>.
 		/// </summary>
+		/// <returns>A <see cref="Clunker.None"/> object.</returns>
 		public Maybe none()
 		{
 			return new None();
@@ -54,7 +76,7 @@ namespace Clunker
 		}
 
 		/// <summary>
-		/// Creates an isntance of an <see cref="Clunker.OnObject"/>.
+		/// Creates an instance of an <see cref="Clunker.OnObject"/>.
 		/// </summary>
 		/// <returns>A new <see cref="Clunker.OnObject"/>.</returns>
 		/// <param name="method">Name of method to call</param>
@@ -63,7 +85,17 @@ namespace Clunker
 		{
 			return new OnObject(method, args);
 		}
-			
+	
+		/// <summary>
+		/// Creates a instance of an <see cref="Clunker.Tuple"/>, containing 
+		/// the given elements.
+		/// </summary>
+		/// <returns>A new <see cref="Clunker.Tuple"/>
+		/// <param name="elements">Elements to include in the tuple.</param>
+		public Tuple pack(params object[] elements)
+		{
+			return new Tuple(elements);
+		}
 	}
 }
 

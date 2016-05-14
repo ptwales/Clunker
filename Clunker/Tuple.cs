@@ -47,7 +47,7 @@ namespace Clunker
 		/// <remarks>Caution! overwrites the targets.</remarks>
 		/// <param name="targets">Objects to be overwritten with the tuple's
 		/// contents.</param>
-		public void unpack(params object[] targets)
+		public void unpack(object[] targets)
 		{
 			if (targets.Length == _elements.Length) {
 				Array.Copy(_elements, targets, _elements.Length);
