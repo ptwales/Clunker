@@ -46,21 +46,21 @@ namespace Clunker.Collections
         public Maybe indexOf(object val)
         {
             Splat eq = a => a[0] == val;
-            return indexWhere(new InternalDelegate(eq));
+			return indexWhere(new InternalDelegate(eq).asPredicate());
         }
 
         public Maybe lastIndexOf(object val)
         {
             Splat eq = a => a[0] == val;
-            return lastIndexWhere(new InternalDelegate(eq));
+			return lastIndexWhere(new InternalDelegate(eq).asPredicate());
         }
 
-        public Maybe find(Func pred)
+		public Maybe find(Pred pred)
         {
             return indexWhere(pred).map(new OnArgs(this, "item"));
         }
 
-        public Maybe findLast(Func pred)
+		public Maybe findLast(Pred pred)
         {
             return lastIndexWhere(pred).map(new OnArgs(this, "item"));
         }
@@ -86,11 +86,11 @@ namespace Clunker.Collections
 
         public abstract object[] toArray();
 
-        public abstract Maybe indexWhere(Func pred);
+		public abstract Maybe indexWhere(Pred pred);
 
-        public abstract Maybe lastIndexWhere(Func pred);
+		public abstract Maybe lastIndexWhere(Pred pred);
 
-        public abstract int countWhere(Func pred);
+		public abstract int countWhere(Pred pred);
 
     }
 }

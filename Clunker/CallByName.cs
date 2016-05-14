@@ -3,7 +3,7 @@ using System.Reflection;
 
 namespace Clunker
 {
-	class OnArgs : AbstractFunc, Showable
+	class OnArgs : AbstractFunction, Showable
 	{
 		private object _obj;
 		private MethodInfo _method;
@@ -44,7 +44,7 @@ namespace Clunker
 		}
 	}
 
-	class OnObject : AbstractFunc, Showable
+	class OnObject : AbstractFunction, Showable
 	{
 		private object[] _args;
 		private string _method;

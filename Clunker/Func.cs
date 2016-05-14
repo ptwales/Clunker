@@ -2,22 +2,8 @@
 
 namespace Clunker
 {
-	public interface Func
+	public interface Func : Applicable<object>
 	{
-		/// <summary>
-		/// Varag wrapper to <see cref="Clunker.Applicable.applyOnArray"/>
-		/// </summary>
-		/// <param name="args">Arguments for the function as <c>params</c>
-		/// </param>
-		object apply(params object[] args);
-
-		/// <summary>
-		/// Applies this function to the array of arguments.
-		/// </summary>
-		/// <returns>The result of applying this function to args.</returns>
-		/// <param name="args">Arguments for the function</param>
-		object applyOnArray(object[] args);
-
 		/// <summary>
 		/// Compose another function inside this function.
 		/// </summary>
@@ -68,9 +54,11 @@ namespace Clunker
 		/// <param name="partialArgs">Some arguments with <c>null</c> for 
 		/// missing args.</param>
 		Func asPartial(object[] partialArgs);
+
+		Pred asPredicate();
 	}
 
-	abstract class AbstractFunc : Func
+	abstract class AbstractFunction : Func
 	{
 		/// <summary>
 		/// Varag wrapper to <see cref="Clunker.Applicable.applyOnArray"/>
@@ -151,9 +139,14 @@ namespace Clunker
 		{
 			return new Partial(this, partialArgs);
 		}
+
+		public Pred asPredicate()
+		{
+			return new PredFunc(this);
+		}
 	}
 
-	class Composed : AbstractFunc
+	class Composed : AbstractFunction
 	{
 		private Func _inner;
 		private Func _outer;
@@ -183,7 +176,7 @@ namespace Clunker
 		}
 	}
 
-	class Partial : AbstractFunc
+	class Partial : AbstractFunction
 	{
 		private Func _function;
 		private object[] _partialArgs;

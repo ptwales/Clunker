@@ -85,7 +85,7 @@ namespace Clunker
 		/// <returns>Maybe the first index that satisfies a predicate.
 		/// </returns>
 		/// <param name="pred">Predicate to check.</param>
-		Maybe indexWhere(Func pred);
+		Maybe indexWhere(Pred pred);
 
 		/// <summary>
 		/// First index who's value equals the given value as a
@@ -104,7 +104,7 @@ namespace Clunker
 		/// <returns>Maybe the last index that satisfies a predicate.
 		/// </returns>
 		/// <param name="pred">Predicate to check.</param>
-		Maybe lastIndexWhere(Func pred);
+		Maybe lastIndexWhere(Pred pred);
 
 		/// <summary>
 		/// Last index who's value equals the given value as a
@@ -123,7 +123,7 @@ namespace Clunker
 		/// <returns>Maybe the first element that satisfies the predicate
 		/// </returns>
 		/// <param name="pred">Predicate to check.</param>
-		Maybe find(Func pred);
+		Maybe find(Pred pred);
 
 		/// <summary>
 		/// Return the value of the last element that satisfies the
@@ -133,14 +133,14 @@ namespace Clunker
 		/// <returns>Maybe the last element that satisfies the predicate
 		/// </returns>
 		/// <param name="pred">Predicate to check.</param>
-		Maybe findLast(Func pred);
+		Maybe findLast(Pred pred);
 
 		/// <summary>
 		/// Return the number of elements that satisfy a predicate.
 		/// </summary>
 		/// <returns>Count of elements that satisfy a predicate.</returns>
 		/// <param name="pred">Predicate to check.</param>
-		int countWhere(Func pred);
+		int countWhere(Pred pred);
 	}
 		
 }
