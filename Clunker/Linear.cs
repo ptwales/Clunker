@@ -48,16 +48,16 @@ namespace Clunker
 		object last();
 
 		/// <summary>
-		/// Return a <see cref="Clunker.Some"/> containing the first
-		/// element, or <see cref="Clunker.None"/>, if the sequence is
+		/// Return a <see cref="Some"/> containing the first
+		/// element, or <see cref="None"/>, if the sequence is
 		/// empty.
 		/// </summary>
 		/// <returns>Maybe the first element.</returns>
 		Maybe maybeHead();
 
 		/// <summary>
-		/// Return a <see cref="Clunker.Some"/> containing the last
-		/// element, or <see cref="Clunker.None"/>, if the sequence is
+		/// Return a <see cref="Some"/> containing the last
+		/// element, or <see cref="None"/>, if the sequence is
 		/// empty.
 		/// </summary>
 		/// <returns>Maybe the last element.</returns>
@@ -72,8 +72,8 @@ namespace Clunker
 
 		/// <summary>
 		/// First index who's value satisfies the predicate as a 
-		/// <see cref="Clunker.Some"/> if found,
-		/// <see cref="Clunker.None"/> if no matches.
+		/// <see cref="Some"/> if found,
+		/// <see cref="None"/> if no matches.
 		/// </summary>
 		/// <returns>Maybe the first index that satisfies a predicate.
 		/// </returns>
@@ -82,8 +82,8 @@ namespace Clunker
 
 		/// <summary>
 		/// First index who's value equals the given value as a
-		/// see cref="Clunker.Some"/> if found,
-		/// <see cref="Clunker.None"/> if no matches.
+		/// see cref="Some"/> if found,
+		/// <see cref="None"/> if no matches.
 		/// </summary>
 		/// <returns>Maybe the first index that equals val</returns>
 		/// <param name="val">Value sought.</param>
@@ -91,8 +91,8 @@ namespace Clunker
 
 		/// <summary>
 		/// Last index who's value satisfies the predicate as a 
-		/// <see cref="Clunker.Some"/> if found,
-		/// <see cref="Clunker.None"/> if no matches.
+		/// <see cref="Some"/> if found,
+		/// <see cref="None"/> if no matches.
 		/// </summary>
 		/// <returns>Maybe the last index that satisfies a predicate.
 		/// </returns>
@@ -101,8 +101,8 @@ namespace Clunker
 
 		/// <summary>
 		/// Last index who's value equals the given value as a
-		/// <see cref="Clunker.Some"/> if found,
-		/// <see cref="Clunker.None"/> if no matches.
+		/// <see cref="Some"/> if found,
+		/// <see cref="None"/> if no matches.
 		/// </summary>
 		/// <returns>Maybe the last index that equals val</returns>
 		/// <param name="val">Value sought.</param>
@@ -110,8 +110,8 @@ namespace Clunker
 
 		/// <summary>
 		/// Return the value of the first element that satisfies the
-		/// predicate as a <see cref="Clunker.Some"/> if found,
-		/// <see cref="Clunker.None"/> if no matches.
+		/// predicate as a <see cref="Some"/> if found,
+		/// <see cref="None"/> if no matches.
 		/// </summary>
 		/// <returns>Maybe the first element that satisfies the predicate
 		/// </returns>
@@ -120,8 +120,8 @@ namespace Clunker
 
 		/// <summary>
 		/// Return the value of the last element that satisfies the
-		/// predicate as a <see cref="Clunker.Some"/> if found,
-		/// <see cref="Clunker.None"/> if no matches.
+		/// predicate as a <see cref="Some"/> if found,
+		/// <see cref="None"/> if no matches.
 		/// </summary>
 		/// <returns>Maybe the last element that satisfies the predicate
 		/// </returns>
@@ -167,12 +167,12 @@ namespace Clunker
 
 		public Maybe find(Applicable pred)
 		{
-			return indexWhere(pred).map(new OnArgs(this, "item"));
+			return (Maybe) indexWhere(pred).map(new OnArgs(this, "item"));
 		}
 
 		public Maybe findLast(Applicable pred)
 		{
-			return lastIndexWhere(pred).map(new OnArgs(this, "item"));
+			return (Maybe) lastIndexWhere(pred).map(new OnArgs(this, "item"));
 		}
 
 		public abstract int lowerBound();

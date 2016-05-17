@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Runtime.InteropServices;
 
 namespace Clunker
 {
-	public class Tuple : Showable
+    [ClassInterface(ClassInterfaceType.AutoDual)]
+    public class Tuple : Showable
 	{
 		private object[] _elements;
 

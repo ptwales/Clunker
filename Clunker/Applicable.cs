@@ -1,11 +1,12 @@
 ﻿using System;
+using System.Runtime.InteropServices;
 
 namespace Clunker
 {
 	public interface Applicable
 	{
 		/// <summary>
-		/// Varag wrapper to <see cref="Clunker.Applicable.applyOnArray"/>
+		/// Varag wrapper to <see cref="Applicable.applyOnArray"/>
 		/// </summary>
 		/// <param name="args">Arguments for the function as <c>params</c>
 		/// </param>
@@ -21,7 +22,7 @@ namespace Clunker
 		/// <summary>
 		/// Compose another function inside this function.
 		/// </summary>
-		/// <remarks> <see cref="Clunker.Applicable.andThen"/> for reverse.
+		/// <remarks> <see cref="Applicable.andThen"/> for reverse.
 		/// </remarks>
 		/// <example>
 		/// // given f(x, y) = x + y
@@ -31,7 +32,7 @@ namespace Clunker
 		/// int a = h(3, 5); // 64
 		/// int b = h(-2, 12); // 100
 		/// </example>
-		/// <returns>A <see cref="Clunker.Composed"/> , where this function is 
+		/// <returns>A <see cref="Composed"/> , where this function is 
 		/// the outer function.</returns>
 		/// <param name="inner">Function to compose.</param>
 		Applicable compose(Applicable inner);
@@ -39,7 +40,7 @@ namespace Clunker
 		/// <summary>
 		/// Compose this function inside another function.
 		/// </summary>
-		/// <remarks><see cref="Clunker.Applicable.compse"/> for reverse.
+		/// <remarks><see cref="Applicable.compse"/> for reverse.
 		/// </remarks>
 		/// <returns>A Composed where this function is the inner function.
 		/// </returns>
@@ -47,14 +48,14 @@ namespace Clunker
 		Applicable andThen(Applicable outer);
 
 		/// <summary>
-		/// Vararg wrapper for <see cref="Clunker.Applicable.asPartial"/>
+		/// Vararg wrapper for <see cref="Applicable.asPartial"/>
 		/// </summary>
 		/// <returns>A partially applied function.</returns>
 		/// <param name="partialArgs">Partial arguments as varargs</param>
 		Applicable partial(params object[] partialArgs);
 
 		/// <summary>
-		/// Create a <see cref="Clunker.Partial"/> function with stored 
+		/// Create a <see cref="Partial"/> function with stored 
 		/// arguments.
 		/// </summary>
 		/// <remarks>Use <c>null</c> to represent missing arguments.</remarks>
@@ -73,7 +74,7 @@ namespace Clunker
 	abstract class AbstractApplicable : Applicable
 	{
 		/// <summary>
-		/// Varag wrapper to <see cref="Clunker.Applicable.applyOnArray"/>
+		/// Varag wrapper to <see cref="Applicable.applyOnArray"/>
 		/// </summary>
 		/// <param name="args">Arguments for the function as <c>params</c>
 		/// </param>
@@ -92,7 +93,7 @@ namespace Clunker
 		/// <summary>
 		/// Compose another function inside this function.
 		/// </summary>
-		/// <remarks> <see cref="Clunker.Applicable.andThen"/> for reverse.
+		/// <remarks> <see cref="Applicable.andThen"/> for reverse.
 		/// </remarks>
 		/// <example>
 		/// // given f(x, y) = x + y
@@ -102,7 +103,7 @@ namespace Clunker
 		/// int a = h(3, 5); // 64
 		/// int b = h(-2, 12); // 100
 		/// </example>
-		/// <returns>A <see cref="Clunker.Composed"/> , where this function is 
+		/// <returns>A <see cref="Composed"/> , where this function is 
 		/// the outer function.</returns>
 		/// <param name="inner">Function to compose.</param>
 		public Applicable compose(Applicable inner)
@@ -113,7 +114,7 @@ namespace Clunker
 		/// <summary>
 		/// Compose this function inside another function.
 		/// </summary>
-		/// <remarks><see cref="Clunker.Applicable.compse"/> for reverse.
+		/// <remarks><see cref="Applicable.compse"/> for reverse.
 		/// </remarks>
 		/// <returns>A Composed where this function is the inner function.
 		/// </returns>
@@ -124,7 +125,7 @@ namespace Clunker
 		}
 
 		/// <summary>
-		/// Vararg wrapper for <see cref="Clunker.Applicable.asPartial"/>
+		/// Vararg wrapper for <see cref="Applicable.asPartial"/>
 		/// </summary>
 		/// <returns>A partially applied function.</returns>
 		/// <param name="partialArgs">Partial arguments as varargs</param>
@@ -134,7 +135,7 @@ namespace Clunker
 		}
 
 		/// <summary>
-		/// Create a <see cref="Clunker.Partial"/> function with stored 
+		/// Create a <see cref="Partial"/> function with stored 
 		/// arguments.
 		/// </summary>
 		/// <remarks>Use <c>null</c> to represent missing arguments.</remarks>
@@ -153,13 +154,14 @@ namespace Clunker
 		}
 	}
 
+    [ClassInterface(ClassInterfaceType.AutoDual)]
 	class Composed : AbstractApplicable
 	{
 		private Applicable _inner;
 		private Applicable _outer;
 
 		/// <summary>
-		/// Initializes a new instance of the <see cref="Clunker.Composed"/> 
+		/// Initializes a new instance of the <see cref="Composed"/> 
 		/// class.
 		/// </summary>
 		/// <param name="outer">Function to apply last.</param>
@@ -183,6 +185,7 @@ namespace Clunker
 		}
 	}
 
+    [ClassInterface(ClassInterfaceType.AutoDual)]
 	class Partial : AbstractApplicable
 	{
 		private Applicable _function;
@@ -190,7 +193,7 @@ namespace Clunker
 		private int _argCount;
 
 		/// <summary>
-		/// Initializes a new instance of the <see cref="Clunker.Partial"/> 
+		/// Initializes a new instance of the <see cref="Partial"/> 
 		/// class.
 		/// </summary>
 		/// <param name="function">Function to preset some arguments.</param>

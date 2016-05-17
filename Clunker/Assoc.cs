@@ -8,7 +8,7 @@ namespace Clunker
 		private object _val;
 
 		/// <summary>
-		/// Initializes a new instance of the <see cref="Clunker.Assoc"/> class.
+		/// Initializes a new instance of the <see cref="Assoc"/> class.
 		/// </summary>
 		/// <param name="key">Key.</param>
 		/// <param name="val">Value.</param>
