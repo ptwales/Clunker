@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.InteropServices;
 
 namespace Clunker
 {
@@ -146,6 +147,7 @@ namespace Clunker
 		}
 	}
 
+	[ClassInterface(ClassInterfaceType.AutoDual)]
 	class Composed : AbstractFunction
 	{
 		private Func _inner;
@@ -176,6 +178,7 @@ namespace Clunker
 		}
 	}
 
+	[ClassInterface(ClassInterfaceType.AutoDual)]
 	class Partial : AbstractFunction
 	{
 		private Func _function;

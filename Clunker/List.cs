@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Clunker;
+using System.Runtime.InteropServices;
 
 namespace Clunker.Collections
 {
 	using SysList = System.Collections.Generic.List<object>;
 
+	[ClassInterface(ClassInterfaceType.AutoDual)]
 	public class List : AbstractLinear, Showable, Monadic<List>
     {
         private SysList _list;
@@ -75,7 +76,7 @@ namespace Clunker.Collections
 		{
 			SysList result = new SysList();
 			foreach (object element in _list) {
-				result.AddRange(f.apply(element));
+				result.AddRange((IEnumerable<object>) f.apply(element));
 			}
 			return new List(result);
 		}
