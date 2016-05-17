@@ -55,16 +55,16 @@ namespace Clunker
 		object last();
 
 		/// <summary>
-		/// Return a <see cref="Some"/> containing the first
-		/// element, or <see cref="None"/>, if the sequence is
+		/// Return a <see cref="Clunker.Some"/> containing the first
+		/// element, or <see cref="Clunker.None"/>, if the sequence is
 		/// empty.
 		/// </summary>
 		/// <returns>Maybe the first element.</returns>
 		Maybe maybeHead();
 
 		/// <summary>
-		/// Return a <see cref="Some"/> containing the last
-		/// element, or <see cref="None"/>, if the sequence is
+		/// Return a <see cref="Clunker.Some"/> containing the last
+		/// element, or <see cref="Clunker.None"/>, if the sequence is
 		/// empty.
 		/// </summary>
 		/// <returns>Maybe the last element.</returns>
@@ -79,8 +79,8 @@ namespace Clunker
 
 		/// <summary>
 		/// First index who's value satisfies the predicate as a 
-		/// <see cref="Some"/> if found,
-		/// <see cref="None"/> if no matches.
+		/// <see cref="Clunker.Some"/> if found,
+		/// <see cref="Clunker.None"/> if no matches.
 		/// </summary>
 		/// <returns>Maybe the first index that satisfies a predicate.
 		/// </returns>
@@ -89,8 +89,8 @@ namespace Clunker
 
 		/// <summary>
 		/// First index who's value equals the given value as a
-		/// see cref="Some"/> if found,
-		/// <see cref="None"/> if no matches.
+		/// see cref="Clunker.Some"/> if found,
+		/// <see cref="Clunker.None"/> if no matches.
 		/// </summary>
 		/// <returns>Maybe the first index that equals val</returns>
 		/// <param name="val">Value sought.</param>
@@ -98,8 +98,8 @@ namespace Clunker
 
 		/// <summary>
 		/// Last index who's value satisfies the predicate as a 
-		/// <see cref="Some"/> if found,
-		/// <see cref="None"/> if no matches.
+		/// <see cref="Clunker.Some"/> if found,
+		/// <see cref="Clunker.None"/> if no matches.
 		/// </summary>
 		/// <returns>Maybe the last index that satisfies a predicate.
 		/// </returns>
@@ -108,8 +108,8 @@ namespace Clunker
 
 		/// <summary>
 		/// Last index who's value equals the given value as a
-		/// <see cref="Some"/> if found,
-		/// <see cref="None"/> if no matches.
+		/// <see cref="Clunker.Some"/> if found,
+		/// <see cref="Clunker.None"/> if no matches.
 		/// </summary>
 		/// <returns>Maybe the last index that equals val</returns>
 		/// <param name="val">Value sought.</param>
@@ -117,8 +117,8 @@ namespace Clunker
 
 		/// <summary>
 		/// Return the value of the first element that satisfies the
-		/// predicate as a <see cref="Some"/> if found,
-		/// <see cref="None"/> if no matches.
+		/// predicate as a <see cref="Clunker.Some"/> if found,
+		/// <see cref="Clunker.None"/> if no matches.
 		/// </summary>
 		/// <returns>Maybe the first element that satisfies the predicate
 		/// </returns>
@@ -127,8 +127,8 @@ namespace Clunker
 
 		/// <summary>
 		/// Return the value of the last element that satisfies the
-		/// predicate as a <see cref="Some"/> if found,
-		/// <see cref="None"/> if no matches.
+		/// predicate as a <see cref="Clunker.Some"/> if found,
+		/// <see cref="Clunker.None"/> if no matches.
 		/// </summary>
 		/// <returns>Maybe the last element that satisfies the predicate
 		/// </returns>
@@ -141,69 +141,6 @@ namespace Clunker
 		/// <returns>Count of elements that satisfy a predicate.</returns>
 		/// <param name="pred">Predicate to check.</param>
 		int countWhere(Pred pred);
-	}
-
-	abstract class AbstractLinear : Linear
-	{
-		public int size()
-		{
-			return upperBound() - lowerBound() + 1;
-		}
-
-		public object head()
-		{
-			return item(lowerBound());
-		}
-
-		public object last()
-		{
-			return item(upperBound());
-		}
-
-		public Maybe indexOf(object val)
-		{
-			Splat eq = a => a[0] == val;
-			return indexWhere(new InternalDelegate(eq));
-		}
-
-		public Maybe lastIndexOf(object val)
-		{
-			Splat eq = a => a[0] == val;
-			return lastIndexWhere(new InternalDelegate(eq));
-		}
-
-		public Maybe find(Applicable pred)
-		{
-			return (Maybe) indexWhere(pred).map(new OnArgs(this, "item"));
-		}
-
-		public Maybe findLast(Applicable pred)
-		{
-			return (Maybe) lastIndexWhere(pred).map(new OnArgs(this, "item"));
-		}
-
-		public abstract int lowerBound();
-
-		public abstract int upperBound();
-
-		public abstract object item(int index);
-
-		public abstract Linear tail();
-
-		public abstract Linear init();
-
-		public abstract Maybe maybeHead();
-
-		public abstract Maybe maybeLast();
-
-		public abstract object[] toArray();
-
-		public abstract Maybe indexWhere(Applicable pred);
-
-		public abstract Maybe lastIndexWhere(Applicable pred);
-
-		public abstract int countWhere(Applicable pred);
-
 	}
 		
 }
