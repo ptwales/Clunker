@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 namespace Clunker.Collections
 {
 	using SysList = System.Collections.Generic.List<object>;
-
+		
 	[ClassInterface(ClassInterfaceType.AutoDual)]
 	public class List : AbstractLinear, Showable, Monadic<List>
     {
@@ -74,11 +74,12 @@ namespace Clunker.Collections
 
 		public List flatMap(Func f)
 		{
-			SysList result = new SysList();
-			foreach (object element in _list) {
-				result.AddRange((IEnumerable<object>) f.apply(element));
-			}
-			return new List(result);
+			return new List(_list.SelectMany(x => (IEnumerable<object>) f.apply(x)));
+		}
+
+		public List filter(Pred p)
+		{
+			return new List(_list.Where(x => p.apply(x)));
 		}
 
         // ---------------- Showable ---------------------

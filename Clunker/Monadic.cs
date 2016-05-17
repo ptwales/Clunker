@@ -18,6 +18,12 @@ namespace Clunker
 		/// </summary>
 		/// <param name="f">Function that must return a monad.</param>
 		Monad flatMap(Func f);
+
+		/// <summary>
+		/// Return a copy with only elements that statisfy the predicate.
+		/// </summary>
+		/// <param name="p">Predicate to satisfy</param>
+		Monad filter(Pred p);
 	}
 }
 

@@ -126,6 +126,15 @@ namespace Clunker
 			return (Maybe) f.apply(_boxed);
 		}
 
+		public Maybe filter(Pred p)
+		{
+			if (p.apply(_boxed)) {
+				return this;
+			} else {
+				return new None();
+			}
+		}
+
 		/// <summary>
 		/// Show this instance.
 		/// </summary>
@@ -191,7 +200,7 @@ namespace Clunker
 		/// was a <see cref="Some"/>.</param>
 		public Maybe map(Func f)
 		{
-			return new None();
+			return this;
 		}
 
 		/// <summary>
@@ -201,7 +210,12 @@ namespace Clunker
 		/// was a <see cref="Some"/>.</param>
 		public Maybe flatMap(Func f)
 		{
-			return new None();
+			return this;
+		}
+
+		public Maybe filter(Pred p)
+		{
+			return this;
 		}
 
 		/// <summary>
