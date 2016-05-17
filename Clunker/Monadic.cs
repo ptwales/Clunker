@@ -18,7 +18,6 @@ namespace Clunker
 		/// </summary>
 		/// <param name="f">Function that must return a monad.</param>
 		Monad flatMap(Func f);
-
 	}
 }
 

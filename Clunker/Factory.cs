@@ -46,7 +46,7 @@ namespace Clunker
 		}
 
 		/// <summary>
-		/// Creates a <see cref="Clunker.Some"/> that contains a non-null object.
+		/// Creates a <see cref="Some"/> that contains a non-null object.
 		/// Will error if null.
 		/// </summary>
 		/// <param name="boxed">Non-null object to contain.</param>
@@ -56,18 +56,18 @@ namespace Clunker
 		}
 
 		/// <summary>
-		/// Creates an instance of a <see cref="Clunker.None"/>.
+		/// Creates an instance of a <see cref="None"/>.
 		/// </summary>
-		/// <returns>A <see cref="Clunker.None"/> object.</returns>
+		/// <returns>A <see cref="None"/> object.</returns>
 		public Maybe none()
 		{
 			return new None();
 		}
 
 		/// <summary>
-		/// Creates an instance of an <see cref="Clunker.OnArgs"/>.
+		/// Creates an instance of an <see cref="OnArgs"/>.
 		/// </summary>
-		/// <returns>A new <see cref="Clunker.OnArgs"/> object.</returns>
+		/// <returns>A new <see cref="OnArgs"/> object.</returns>
 		/// <param name="obj">Object to call on.</param>
 		/// <param name="method">Name of method to call.</param>
 		public Func onArgs(object obj, string method)

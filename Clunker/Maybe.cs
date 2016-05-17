@@ -3,42 +3,43 @@ using System.Runtime.InteropServices;
 
 namespace Clunker
 {
-   
-	public interface Maybe : Monadic<Maybe>, Showable
+    
+    public interface Maybe : Monadic<Maybe>, Showable
 	{
 		/// <summary>
-		/// Returns <c>true</c> if is <see cref="Clunker.Some"/>,
+		/// Returns <c>true</c> if is <see cref="Some"/>,
 		/// <c>false</c> otherwise.
 		/// </summary>
-		/// <returns><c>true</c> if is <see cref="Clunker.Some"/>,
+		/// <returns><c>true</c> if is <see cref="Some"/>,
 		/// <c>false</c> otherwise.</returns>
 		bool isSome();
 
 		/// <summary>
-		/// Returns <c>true</c> if is <see cref="Clunker.None"/>,
+		/// Returns <c>true</c> if is <see cref="None"/>,
 		/// <c>false</c> otherwise.
 		/// </summary>
-		/// <returns><c>true</c> if is <see cref="Clunker.None"/>,
+		/// <returns><c>true</c> if is <see cref="None"/>,
 		/// <c>false</c> otherwise.</returns>
 		bool isNone();
 
 		/// <summary>
-		/// Returns contained object this is <see cref="Clunker.Some"/>,
+		/// Returns contained object this is <see cref="Some"/>,
 		/// throws an error otherwise.
 		/// </summary>
 		/// <returns>The contained object or error is thrown.</returns>
 		object getItem();
 
 		/// <summary>
-		/// Returns contained object this is <see cref="Clunker.Some"/>, 
-		/// or <c>other</c> if it is <see cref="Clunker.None"/>.
+		/// Returns contained object this is <see cref="Some"/>, 
+		/// or <c>other</c> if it is <see cref="None"/>.
 		/// </summary>
-		/// <returns>Contained object if this is <see cref="Clunker.Some"/>,
-		/// <c>other</c> if it is <see cref="Clunker.None"/>.</returns>
+		/// <returns>Contained object if this is <see cref="Some"/>,
+		/// <c>other</c> if it is <see cref="None"/>.</returns>
 		/// <param name="other">Other.</param>
 		object getOrElse(object other);
 	}
-		
+	
+    [ClassInterface(ClassInterfaceType.AutoDual)]	
 	class Some : Maybe
 	{
 		/// <summary>
@@ -47,7 +48,7 @@ namespace Clunker
 		private object _boxed;
 
 		/// <summary>
-		/// Initializes a new instance of the <see cref="Clunker.Some"/> class
+		/// Initializes a new instance of the <see cref="Some"/> class
 		/// containing non-null object <c>boxed</c>.
 		/// </summary>
 		/// <param name="boxed">Non null object to contain.</param>
@@ -93,15 +94,15 @@ namespace Clunker
 		/// </summary>
 		/// <returns>The contained object.</returns>
 		/// <param name="other">What would be returned if this was a
-		/// <see cref="Clunker.None"/>.</param>
+		/// <see cref="None"/>.</param>
 		public object getOrElse(object other)
 		{
 			return _boxed;
 		}
 
 		/// <summary>
-		/// Return a <see cref="Clunker.Some"/> containing the result
-		/// of applying f to the contents of this <see cref="Clunker.Some"/>.
+		/// Return a <see cref="Some"/> containing the result
+		/// of applying f to the contents of this <see cref="Some"/>.
 		/// </summary>
 		/// <returns><c>Some(f.apply(boxed))</c></returns>
 		/// <param name="f">The function to apply</param>
@@ -134,11 +135,12 @@ namespace Clunker
 			return DefShow.showParameters(this, _boxed);
 		}
 	}
-		
+	
+    [ClassInterface(ClassInterfaceType.AutoDual)]	
 	class None : Maybe
 	{
 		/// <summary>
-		/// Initializes a new instance of the <see cref="Clunker.None"/> class.
+		/// Initializes a new instance of the <see cref="None"/> class.
 		/// </summary>
 		public None()
 		{
@@ -183,20 +185,20 @@ namespace Clunker
 		}
 
 		/// <summary>
-		/// Returns a new <see cref="Clunker.None"/>.
+		/// Returns a new <see cref="None"/>.
 		/// </summary>
 		/// <param name="f">Function to apply to the contained object if this
-		/// was a <see cref="Clunker.Some"/>.</param>
+		/// was a <see cref="Some"/>.</param>
 		public Maybe map(Func f)
 		{
 			return new None();
 		}
 
 		/// <summary>
-		/// Returns a new <see cref="Clunker.None"/>.
+		/// Returns a new <see cref="None"/>.
 		/// </summary>
 		/// <param name="f">Function to apply to the contained object if this
-		/// was a <see cref="Clunker.Some"/>.</param>
+		/// was a <see cref="Some"/>.</param>
 		public Maybe flatMap(Func f)
 		{
 			return new None();

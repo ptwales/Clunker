@@ -10,7 +10,7 @@ namespace Clunker
 		private string _methodName;
 
 		/// <summary>
-		/// Initializes a new instance of the <see cref="Clunker.OnArgs"/> 
+		/// Initializes a new instance of the <see cref="OnArgs"/> 
 		/// class.
 		/// </summary>
 		/// <param name="obj">Object to call the method.</param>
@@ -50,7 +50,7 @@ namespace Clunker
 		private string _method;
 
 		/// <summary>
-		/// Initializes a new instance of the <see cref="Clunker.OnObject"/>
+		/// Initializes a new instance of the <see cref="OnObject"/>
 		/// class.
 		/// </summary>
 		/// <param name="method">Name of method to call.</param>
