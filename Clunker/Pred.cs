@@ -2,12 +2,15 @@
 
 namespace Clunker
 {
-	public interface Pred : Applicable<bool> {}
+	public interface Pred : Applicable<bool> 
+	{
+	}
 
 	public abstract class AbstractPredicate : Pred
 	{
 		public bool apply(params object[] args)
 		{
+
 			return applyOnArray(args);
 		}
 

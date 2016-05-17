@@ -180,7 +180,6 @@ namespace Clunker
 	{
 		private Func _function;
 		private object[] _partialArgs;
-		private int _argCount;
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="Clunker.Partial"/> 
@@ -193,7 +192,6 @@ namespace Clunker
 		{
 			_function = function;
 			_partialArgs = partialArgs;
-			_argCount = _partialArgs.Length;
 		}
 
 		/// <summary>
@@ -212,10 +210,10 @@ namespace Clunker
 		public override object applyOnArray(object[] args)
 		{
 
-			object[] usedArgs = new object[_argCount];
+			object[] usedArgs = new object[_partialArgs.Length];
 			var a = 0;
 
-			for (int p = 0; p < _argCount; ++p) {
+			for (int p = 0; p < _partialArgs.Length; ++p) {
 
 				if (_partialArgs[p] == null) {
 					usedArgs[p] = args[a];

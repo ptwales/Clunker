@@ -5,15 +5,15 @@ using Clunker;
 
 namespace Clunker.Collections
 {
-    using DotNetCollections = System.Collections.Generic;
+	using SysList = System.Collections.Generic.List<object>;
 
-    public class List : AbstractLinear, Showable
+	public class List : AbstractLinear, Showable, Monadic<List>
     {
-        private DotNetCollections.List<object> _list;
+        private SysList _list;
 
         public List(IEnumerable<object> sequence)
         {
-            _list = new DotNetCollections.List<object>(sequence);
+			_list = new SysList(sequence);
         }
 
         // --------------- Linear ------------------------
@@ -64,6 +64,21 @@ namespace Clunker.Collections
         {
             return _list.Count(x => pred.apply(x));
         }
+
+		// ---------------- Monadic ----------------------
+		public List map(Func f)
+		{
+			return new List(_list.Select(x => f.apply(x)));
+		}
+
+		public List flatMap(Func f)
+		{
+			SysList result = new SysList();
+			foreach (object element in _list) {
+				result.AddRange(f.apply(element));
+			}
+			return new List(result);
+		}
 
         // ---------------- Showable ---------------------
 
