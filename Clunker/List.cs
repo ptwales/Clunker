@@ -6,9 +6,9 @@ using System.Runtime.InteropServices;
 namespace Clunker.Collections
 {
 	using SysList = System.Collections.Generic.List<object>;
-		
+
 	[ClassInterface(ClassInterfaceType.AutoDual)]
-	public class List : AbstractLinear, Showable, Monadic<List>
+	public class List : AbstractSequence
     {
         private SysList _list;
 
@@ -34,17 +34,17 @@ namespace Clunker.Collections
             return _list[index];
         }
 
-        public override Linear tail()
+		public override Seq tail()
         {
             return new List(_list.GetRange(1, upperBound()));
         }
 
-        public override Linear init()
+		public override Seq init()
         {
             return new List(_list.GetRange(0, upperBound()));
         }
 
-        public override  object[] toArray()
+        public override object[] toArray()
         {
             return _list.ToArray();
         }
@@ -67,24 +67,25 @@ namespace Clunker.Collections
         }
 
 		// ---------------- Monadic ----------------------
-		public List map(Func f)
+
+		public override Seq map(Func f)
 		{
 			return new List(_list.Select(x => f.apply(x)));
 		}
 
-		public List flatMap(Func f)
+		public override Seq flatMap(Func f)
 		{
 			return new List(_list.SelectMany(x => (IEnumerable<object>) f.apply(x)));
 		}
 
-		public List filter(Pred p)
+		public override Seq filter(Pred p)
 		{
 			return new List(_list.Where(x => p.apply(x)));
 		}
 
         // ---------------- Showable ---------------------
 
-        public string show()
+		public override string show()
         {
             return DefShow.showBySequence(this, _list);
         }

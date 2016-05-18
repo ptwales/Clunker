@@ -40,7 +40,18 @@ namespace ClunkerTests
             }
         }
 
-        // maps and flat map might be extracted to a battery
+        //[Test()]
+        //public void attemptConstructor()
+        //{
+        //    Func f = ???
+        //    Delay willPass = f.delay(???);
+        //    Maybe passed = f.Attempt(willPass);
+        //    Assert.IsTrue(passed.isSome());
+        //    Delay willFail = f.delay(???);
+        //    Maybe failed = f.Attempt(willFail);
+        //    Assert.IsNone(failed.isNone);
+        //}
+
     }
 }
 

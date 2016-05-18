@@ -96,6 +96,12 @@ namespace Clunker
 		{
 			return new Tuple(elements);
 		}
+
+		public Collections.Seq createList(params object[] elements)
+		{
+			return new Collections.List(elements);
+		}
+
 	}
 }
 

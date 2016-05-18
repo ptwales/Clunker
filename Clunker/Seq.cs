@@ -1,9 +1,9 @@
 ﻿using System;
 
-namespace Clunker
+namespace Clunker.Collections
 {
-	public interface Linear
-	{
+	public interface Seq : Monadic<Seq>, Transversable, Showable
+    {
 		/// <summary>
 		/// Return the lowest valid index of the sequence.
 		/// </summary>
@@ -42,12 +42,12 @@ namespace Clunker
 		/// <summary>
 		/// Return the rest of the sequence after the first element.
 		/// </summary>
-		Linear tail();
+		Seq tail();
 
 		/// <summary>
 		/// Return the sequence without the last element.
 		/// </summary>
-		Linear init();
+		Seq init();
 
 		/// <summary>
 		/// Return the last element in the sequence.
@@ -141,7 +141,108 @@ namespace Clunker
 		/// <returns>Count of elements that satisfy a predicate.</returns>
 		/// <param name="pred">Predicate to check.</param>
 		int countWhere(Pred pred);
+    }
+
+	public abstract class AbstractSequence : Seq
+	{
+		// ---------------- Linear -------------------------
+		public int size()
+		{
+			return upperBound() - lowerBound() + 1;
+		}
+
+		public object head()
+		{
+			return item(lowerBound());
+		}
+
+		public object last()
+		{
+			return item(upperBound());
+		}
+
+		public bool isEmpty()
+		{
+			return size() == 0;
+		}
+
+		public Maybe maybeHead()
+		{
+			if (!isEmpty()) {
+				return new Some(head());
+			} else {
+				return new None();
+			}
+		}
+
+		public Maybe maybeLast() 
+		{
+			if (!isEmpty()) {
+				return new Some(last());
+			} else {
+				return new None();
+			}
+		}
+
+		public Maybe indexOf(object val)
+		{
+			Splat eq = a => a[0] == val;
+			return indexWhere(new InternalDelegate(eq).asPredicate());
+		}
+
+		public Maybe lastIndexOf(object val)
+		{
+			Splat eq = a => a[0] == val;
+			return lastIndexWhere(new InternalDelegate(eq).asPredicate());
+		}
+
+		public Maybe find(Pred pred)
+		{
+			return indexWhere(pred).map(new OnArgs(this, "item"));
+		}
+
+		public Maybe findLast(Pred pred)
+		{
+			return lastIndexWhere(pred).map(new OnArgs(this, "item"));
+		}
+
+		protected Maybe findResult(int result, int invalid)
+		{
+			if (result != invalid) {
+				return new Some(result);
+			} else {
+				return new None();
+			}
+		}
+
+		public abstract int lowerBound();
+
+		public abstract int upperBound();
+
+		public abstract object item(int index);
+
+		public abstract Seq tail();
+
+		public abstract Seq init();
+
+		public abstract object[] toArray();
+
+		public abstract Maybe indexWhere(Pred pred);
+
+		public abstract Maybe lastIndexWhere(Pred pred);
+
+		public abstract int countWhere(Pred pred);
+
+		// ------------------ Monadic ---------------------
+
+		public abstract Seq map(Func f);
+		public abstract Seq flatMap(Func f);
+		public abstract Seq filter(Pred p);
+
+		// ------------------ Showable --------------------
+	
+		public abstract string show();
 	}
-		
+
 }
 
