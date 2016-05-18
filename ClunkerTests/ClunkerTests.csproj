@@ -38,6 +38,7 @@
     <Compile Include="MaybeTest.cs" />
     <Compile Include="TupleTest.cs" />
     <Compile Include="ListTest.cs" />
+    <Compile Include="InternalDelegateTest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

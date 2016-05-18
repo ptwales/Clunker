@@ -10,7 +10,7 @@ namespace ClunkerTests
     public class ListTest
     {
         private static Factory f = new Factory();
-        private Seq l = f.createList('a', "b", 0);
+        private Seq l = f.seq('a', "b", 0);
 
         [Test()]
         public void itemTest()

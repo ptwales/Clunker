@@ -11,7 +11,7 @@ namespace Clunker
 		}
 
 		/// <summary>
-		/// Creates a new instance of an <see cref="Clunker.Assoc"/> class.
+		/// Creates a new instance of an <see cref="Assoc"/> class.
 		/// </summary>
 		/// <param name="key">Key.</param>
 		/// <param name="val">Value.</param>
@@ -21,7 +21,7 @@ namespace Clunker
 		}
 
 		/// <summary>
-		/// Initializes a new instance of the <see cref="Clunker.Assoc"/> class,
+		/// Initializes a new instance of the <see cref="Assoc"/> class,
 		/// where the value is the result of op applied to the key.
 		/// </summary>
 		/// <param name="op">Function to apply to the key to get the value.</param>
@@ -64,6 +64,11 @@ namespace Clunker
 			return new None();
 		}
 
+		public Func internalDelegate(Splat s)
+		{
+			return new InternalDelegate(s);
+		}
+
 		/// <summary>
 		/// Creates an instance of an <see cref="OnArgs"/>.
 		/// </summary>
@@ -76,7 +81,7 @@ namespace Clunker
 		}
 
 		/// <summary>
-		/// Creates an instance of an <see cref="Clunker.OnObject"/>.
+		/// Creates an instance of an <see cref="OnObject"/>.
 		/// </summary>
 		/// <returns>A new <see cref="Clunker.OnObject"/>.</returns>
 		/// <param name="method">Name of method to call</param>
@@ -87,7 +92,7 @@ namespace Clunker
 		}
 	
 		/// <summary>
-		/// Creates a instance of an <see cref="Clunker.Tuple"/>, containing 
+		/// Creates a instance of an <see cref="Tuple"/>, containing 
 		/// the given elements.
 		/// </summary>
 		/// <returns>A new <see cref="Clunker.Tuple"/>
@@ -97,7 +102,12 @@ namespace Clunker
 			return new Tuple(elements);
 		}
 
-		public Collections.Seq createList(params object[] elements)
+		/// <summary>
+		/// Creates a Sequence (<see cref="Seq"/>) containing the given elements.
+		/// </summary>
+		/// <returns>A new Seq</returns>
+		/// <param name="elements">Elements to be contained in the new Sequence.</param>
+		public Collections.Seq seq(params object[] elements)
 		{
 			return new Collections.List(elements);
 		}

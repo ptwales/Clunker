@@ -2,7 +2,7 @@
 
 namespace Clunker
 {
-	delegate object Splat(object[] args);
+	public delegate object Splat(object[] args);
 
     class InternalDelegate : AbstractFunction
     {
