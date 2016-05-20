@@ -141,6 +141,28 @@ namespace Clunker.Collections
 		/// <returns>Count of elements that satisfy a predicate.</returns>
 		/// <param name="pred">Predicate to check.</param>
 		int countWhere(Pred pred);
+
+		//Seq takeLeft(int n);
+		//Seq takeRight(int n);
+		//Seq takeWhile(Pred p);
+		//Seq dropLeft(int n);
+		//Seq dropRight(int n);
+		//Seq dropWhile(Pred p);
+		//object foldLeft(object z, Func f);
+		//object foldRight(object z, Func f);
+		//object reduceLeft(Func f);
+		//object reduceRight(Func f);
+
+		//Tuple partition(Pred p);
+
+		// Seqs of Seqs should use iterators.
+		//Iter scanLeft(object z, Func f);
+		//Iter scanRight(object z, Func f);
+		//Iter inits();
+		//Iter tails();
+		//Iter sliding(int size, int step);
+		//Iter sliding(int size);
+		//Iter grouped(int size);
     }
 
 	public abstract class AbstractSequence : Seq
@@ -186,13 +208,13 @@ namespace Clunker.Collections
 
 		public Maybe indexOf(object val)
 		{
-			Splat eq = a => a[0] == val;
+			Splat eq = a => a[0].Equals(val);
 			return indexWhere(new InternalDelegate(eq).asPredicate());
 		}
 
 		public Maybe lastIndexOf(object val)
 		{
-			Splat eq = a => a[0] == val;
+			Splat eq = a => a[0].Equals(val);
 			return lastIndexWhere(new InternalDelegate(eq).asPredicate());
 		}
 
