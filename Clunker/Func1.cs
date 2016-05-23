@@ -1,9 +1,10 @@
 ﻿using System;
+using System.Linq;
 using System.Runtime.InteropServices;
 
 namespace Clunker
 {
-	public delegate object Unary(object arg);
+	using Unary = System.Func<object, object>;
 
 	public interface Func1
 	{

@@ -26,7 +26,7 @@ namespace Clunker
 		/// </summary>
 		/// <param name="op">Function to apply to the key to get the value.</param>
 		/// <param name="key">Key.</param>
-		public Assoc memeo(Func op, object key)
+		public Assoc memeo(FuncN op, object key)
 		{
 			return new Assoc(key, op.apply(key));
 		}
@@ -64,17 +64,17 @@ namespace Clunker
 			return new None();
 		}
 
-		public Func varagFunc(Splat s)
+		public FuncN varagFunc(Func<object[], object> s)
 		{
 			return new VariadicFunction(s);
 		}
 
-		public Func1 unaryFunc(Unary f)
+		public Func1 unaryFunc(Func<object, object> f)
 		{
 			return new UnaryFunction(f);
 		}
 
-		public Pred predicate(Unary f)
+		public Pred predicate(Func<object, object> f)
 		{
 			return unaryFunc(f).asPredicate();
 		}
@@ -85,7 +85,7 @@ namespace Clunker
 		/// <returns>A new <see cref="OnArgs"/> object.</returns>
 		/// <param name="obj">Object to call on.</param>
 		/// <param name="method">Name of method to call.</param>
-		public Func onArgs(object obj, string method)
+		public FuncN onArgs(object obj, string method)
 		{
 			return new OnArgs(obj, method);
 		}
@@ -96,7 +96,7 @@ namespace Clunker
 		/// <returns>A new <see cref="Clunker.OnObject"/>.</returns>
 		/// <param name="method">Name of method to call</param>
 		/// <param name="args">Arguments to call with the method.</param>
-		public Func onObject(string method, params object[] args)
+		public FuncN onObject(string method, params object[] args)
 		{
 			return new OnObject(method, args);
 		}

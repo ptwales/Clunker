@@ -5,6 +5,9 @@ using Clunker;
 
 namespace ClunkerTests
 {
+    using Splat = System.Func<object[], object>;
+    using Unary = System.Func<object, object>;
+
     [TestFixture()]
     public class InternalDelegateTest
     {
@@ -14,7 +17,7 @@ namespace ClunkerTests
         public void identityTest()
         {
             Splat s = a => a[0];
-            Func f = factory.varagFunc(s);
+            FuncN f = factory.varagFunc(s);
             Assert.AreEqual('a', f.apply('a'));
             Assert.AreEqual(0, f.apply(0));
         }
@@ -23,7 +26,7 @@ namespace ClunkerTests
         public void operationTest()
         {
             Splat s = a => (string)a[0] + (string)a[1];
-            Func f = factory.varagFunc(s);
+            FuncN f = factory.varagFunc(s);
             Assert.AreEqual("ab", f.apply("a", "b"));
         }
 
@@ -31,7 +34,7 @@ namespace ClunkerTests
         public void booleanFunctionTest()
         {
             Splat s = a => a[0].Equals(a[1]);
-            Func f = factory.varagFunc(s);
+            FuncN f = factory.varagFunc(s);
             Assert.IsTrue((bool)f.apply(1, 1));
             Assert.IsFalse((bool)f.apply(1, 0));
         }

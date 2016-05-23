@@ -8,7 +8,7 @@ namespace ClunkerTests
     public class ApplicableTests
     {
         private static Factory clunk = new Factory();
-        private static Func func = clunk.varagFunc(
+        private static FuncN func = clunk.varagFunc(
                                        a => a[0].Equals(a[1]));
         private static Func1 func1 = func.asUnary();
         //private static Func2 func2 = func.asBinary();

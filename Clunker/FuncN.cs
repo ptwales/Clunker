@@ -3,7 +3,9 @@ using System.Runtime.InteropServices;
 
 namespace Clunker
 {
-	public interface Func
+	using Splat = Func<object[], object>;
+	
+	public interface FuncN
 	{
 		/// <summary>
 		/// Varag wrapper to <see cref="Clunker.Applicable.applyOnArray"/>
@@ -26,7 +28,7 @@ namespace Clunker
 		/// <returns>A partially applied function.</returns>
 		/// <param name="partialArgs">Some arguments with <c>null</c> for 
 		/// missing args.</param>
-		Func asPartial(object[] partialArgs);
+		FuncN asPartial(object[] partialArgs);
 
 		Func1 asUnary();
 
@@ -34,7 +36,7 @@ namespace Clunker
 		//Func2 asBinary();
 	}
 
-	abstract class AbstractFunction : Func
+	abstract class AbstractFunction : FuncN
 	{
 		/// <summary>
 		/// Applies this function to the array of arguments.
@@ -57,7 +59,7 @@ namespace Clunker
 		/// <returns>A partially applied function.</returns>
 		/// <param name="partialArgs">Some arguments with <c>null</c> for 
 		/// missing args.</param>
-		public Func asPartial(object[] partialArgs)
+		public FuncN asPartial(object[] partialArgs)
 		{
 			return new Partial(this, partialArgs);
 		}
@@ -72,8 +74,6 @@ namespace Clunker
 			return new UnaryFunction(t => this.apply(((Tuple)t).explode()));
 		}
 	}
-
-	public delegate object Splat(object[] args);
 
 	[ClassInterface(ClassInterfaceType.AutoDual)]
 	class VariadicFunction : AbstractFunction
@@ -94,7 +94,7 @@ namespace Clunker
 	[ClassInterface(ClassInterfaceType.AutoDual)]
 	class Partial : AbstractFunction
 	{
-		private Func _function;
+		private FuncN _function;
 		private object[] _partialArgs;
 
 		/// <summary>
@@ -104,7 +104,7 @@ namespace Clunker
 		/// <param name="function">Function to preset some arguments.</param>
 		/// <param name="partialArgs">Partial arguments, use <c>null</c> for
 		/// missing arguments.</param>
-		public Partial(Func function, object[] partialArgs)
+		public Partial(FuncN function, object[] partialArgs)
 		{
 			_function = function;
 			_partialArgs = partialArgs;

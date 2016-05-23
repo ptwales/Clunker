@@ -208,14 +208,14 @@ namespace Clunker.Collections
 
 		public Maybe indexOf(object val)
 		{
-			Unary eq = a => a.Equals(val);
-			return indexWhere(new UnaryFunction(eq).asPredicate());
+			Predicate<object> eq = a => a.Equals(val);
+			return indexWhere(new PredFunc(eq));
 		}
 
 		public Maybe lastIndexOf(object val)
 		{
-			Unary eq = a => a.Equals(val);
-			return lastIndexWhere(new UnaryFunction(eq).asPredicate());
+			Predicate<object> eq = a => a.Equals(val);
+			return lastIndexWhere(new PredFunc(eq));
 		}
 
 		public Maybe find(Pred pred)
@@ -257,9 +257,9 @@ namespace Clunker.Collections
 
 		// ------------------ Monadic ---------------------
 
-		public abstract Seq map(Func f);
+		public abstract Seq map(FuncN f);
 
-		public abstract Seq flatMap(Func f);
+		public abstract Seq flatMap(FuncN f);
 
 		public abstract Seq filter(Pred p);
 

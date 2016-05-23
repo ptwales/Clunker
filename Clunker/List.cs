@@ -51,13 +51,13 @@ namespace Clunker.Collections
 
 		public override Maybe indexWhere(Pred pred)
 		{
-			var result = _list.FindIndex(x => pred.apply(x));
+			var result = _list.FindIndex(pred.asDelegate());
 			return findResult(result, -1);
 		}
 
 		public override Maybe lastIndexWhere(Pred pred)
 		{
-			var result = _list.FindLastIndex(x => pred.apply(x));
+			var result = _list.FindLastIndex(pred.asDelegate());
 			return findResult(result, -1);
 		}
 
@@ -68,12 +68,12 @@ namespace Clunker.Collections
 
 		// ---------------- Monadic ----------------------
 
-		public override Seq map(Func f)
+		public override Seq map(FuncN f)
 		{
 			return new List(_list.Select(x => f.apply(x)));
 		}
 
-		public override Seq flatMap(Func f)
+		public override Seq flatMap(FuncN f)
 		{
 			return new List(_list.SelectMany(x => (IEnumerable<object>)f.apply(x)));
 		}
