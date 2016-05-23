@@ -45,15 +45,16 @@
     <Compile Include="Monadic.cs" />
     <Compile Include="Showable.cs" />
     <Compile Include="CallByName.cs" />
-    <Compile Include="InternalDelegate.cs" />
     <Compile Include="Assoc.cs" />
     <Compile Include="Tuple.cs" />
     <Compile Include="Func.cs" />
     <Compile Include="Applicable.cs" />
-    <Compile Include="Pred.cs" />
     <Compile Include="List.cs" />
     <Compile Include="Seq.cs" />
     <Compile Include="Transversable.cs" />
+    <Compile Include="Func1.cs" />
+    <Compile Include="Functions.cs" />
+    <Compile Include="Pred.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

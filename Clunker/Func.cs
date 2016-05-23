@@ -3,42 +3,16 @@ using System.Runtime.InteropServices;
 
 namespace Clunker
 {
-	public interface Func : Applicable<object>
+	public interface Func : Applicable<object[], object>
 	{
 		/// <summary>
-		/// Compose another function inside this function.
+		/// Varag wrapper to <see cref="Clunker.Applicable.applyOnArray"/>
 		/// </summary>
-		/// <remarks> <see cref="Clunker.Applicable.andThen"/> for reverse.
-		/// </remarks>
-		/// <example>
-		/// // given f(x, y) = x + y
-		/// // and g(x) = x * x
-		/// Applicable h = g.compose(f);
-		/// // h(x, y) = (x + y) * (x + y)
-		/// int a = h(3, 5); // 64
-		/// int b = h(-2, 12); // 100
-		/// </example>
-		/// <returns>A <see cref="Clunker.Composed"/> , where this function is 
-		/// the outer function.</returns>
-		/// <param name="inner">Function to compose.</param>
-		Func compose(Func inner);
+		/// <param name="args">Arguments for the function as <c>params</c>
+		/// </param>
+		new object apply(params object[] args);
 
-		/// <summary>
-		/// Compose this function inside another function.
-		/// </summary>
-		/// <remarks><see cref="Clunker.Applicable.compse"/> for reverse.
-		/// </remarks>
-		/// <returns>A Composed where this function is the inner function.
-		/// </returns>
-		/// <param name="outer">Function with this will be composed.</param>
-		Func andThen(Func outer);
-
-		/// <summary>
-		/// Vararg wrapper for <see cref="Clunker.Applicable.asPartial"/>
-		/// </summary>
-		/// <returns>A partially applied function.</returns>
-		/// <param name="partialArgs">Partial arguments as varargs</param>
-		Func partial(params object[] partialArgs);
+		object applyOnArray(object[] args);
 
 		/// <summary>
 		/// Create a <see cref="Clunker.Partial"/> function with stored 
@@ -56,7 +30,8 @@ namespace Clunker
 		/// missing args.</param>
 		Func asPartial(object[] partialArgs);
 
-		Pred asPredicate();
+		Func1 asUnary();
+		//Func2 asBinary();
 	}
 
 	abstract class AbstractFunction : Func
@@ -78,49 +53,7 @@ namespace Clunker
 		/// <param name="args">Arguments for the function</param>
 		public abstract object applyOnArray(object[] args);
 
-		/// <summary>
-		/// Compose another function inside this function.
-		/// </summary>
-		/// <remarks> <see cref="Clunker.Applicable.andThen"/> for reverse.
-		/// </remarks>
-		/// <example>
-		/// // given f(x, y) = x + y
-		/// // and g(x) = x * x
-		/// Applicable h = g.compose(f);
-		/// // h(x, y) = (x + y) * (x + y)
-		/// int a = h(3, 5); // 64
-		/// int b = h(-2, 12); // 100
-		/// </example>
-		/// <returns>A <see cref="Clunker.Composed"/> , where this function is 
-		/// the outer function.</returns>
-		/// <param name="inner">Function to compose.</param>
-		public Func compose(Func inner)
-		{
-			return new Composed(this, inner);
-		}
 
-		/// <summary>
-		/// Compose this function inside another function.
-		/// </summary>
-		/// <remarks><see cref="Clunker.Applicable.compse"/> for reverse.
-		/// </remarks>
-		/// <returns>A Composed where this function is the inner function.
-		/// </returns>
-		/// <param name="outer">Function with this will be composed.</param>
-		public Func andThen(Func outer)
-		{
-			return outer.compose(this);
-		}
-
-		/// <summary>
-		/// Vararg wrapper for <see cref="Clunker.Applicable.asPartial"/>
-		/// </summary>
-		/// <returns>A partially applied function.</returns>
-		/// <param name="partialArgs">Partial arguments as varargs</param>
-		public Func partial(params object[] partialArgs)
-		{
-			return asPartial(partialArgs);
-		}
 
 		/// <summary>
 		/// Create a <see cref="Clunker.Partial"/> function with stored 
@@ -141,42 +74,13 @@ namespace Clunker
 			return new Partial(this, partialArgs);
 		}
 
-		public Pred asPredicate()
+		public Func1 asUnary()
 		{
-			return new PredFunc(this);
+			return new UnaryFunction(x => this.apply(x));
 		}
+			
 	}
 
-	[ClassInterface(ClassInterfaceType.AutoDual)]
-	class Composed : AbstractFunction
-	{
-		private Func _inner;
-		private Func _outer;
-
-		/// <summary>
-		/// Initializes a new instance of the <see cref="Clunker.Composed"/> 
-		/// class.
-		/// </summary>
-		/// <param name="outer">Function to apply last.</param>
-		/// <param name="inner">Function to apply first.</param>
-		public Composed(Func outer, Func inner)
-		{
-			_inner = inner;
-			_outer = outer;
-		}
-
-		/// <summary>
-		/// Applies the inner function on the args then uses the result
-		/// as the only arg for the outer function and returns that result.
-		/// </summary>
-		/// <returns>The result of outer(inner(args)).</returns>
-		/// <param name="args">Arguments for the inner function.</param>
-		public override object applyOnArray(object[] args)
-		{
-			var x = _inner.applyOnArray(args);
-			return _outer.apply(x);
-		}
-	}
 
 	[ClassInterface(ClassInterfaceType.AutoDual)]
 	class Partial : AbstractFunction

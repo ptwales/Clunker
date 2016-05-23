@@ -39,6 +39,7 @@
     <Compile Include="TupleTest.cs" />
     <Compile Include="ListTest.cs" />
     <Compile Include="InternalDelegateTest.cs" />
+    <Compile Include="ApplicableTests.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

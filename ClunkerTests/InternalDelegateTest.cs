@@ -14,7 +14,7 @@ namespace ClunkerTests
         public void identityTest()
         {
             Splat s = a => a[0];
-            Func f = factory.internalDelegate(s);
+            Func f = factory.varagFunc(s);
             Assert.AreEqual('a', f.apply('a'));
             Assert.AreEqual(0, f.apply(0));
         }
@@ -23,7 +23,7 @@ namespace ClunkerTests
         public void operationTest()
         {
             Splat s = a => (string) a[0] + (string) a[1];
-            Func f = factory.internalDelegate(s);
+            Func f = factory.varagFunc(s);
             Assert.AreEqual("ab", f.apply("a", "b"));
         }
 
@@ -31,7 +31,7 @@ namespace ClunkerTests
         public void booleanFunctionTest()
         {
             Splat s = a => a[0].Equals(a[1]);
-            Func f = factory.internalDelegate(s);
+            Func f = factory.varagFunc(s);
             Assert.IsTrue((bool) f.apply(1, 1));
             Assert.IsFalse((bool) f.apply(1, 0));
         }
@@ -39,10 +39,10 @@ namespace ClunkerTests
         [Test()]
         public void predicateTest()
         {
-            Splat s = a => a[0].Equals(a[1]);
-            Pred p = factory.internalDelegate(s).asPredicate();
-            Assert.IsTrue(p.apply('a', 'a'));
-            Assert.IsFalse(p.apply(1, 0));
+            Unary f = x => x.Equals('a');
+            Pred p = factory.predicate(f);
+            Assert.IsTrue(p.apply('a'));
+            Assert.IsFalse(p.apply(0));
         }
     }
 }

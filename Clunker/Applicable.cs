@@ -3,21 +3,9 @@ using System.Runtime.InteropServices;
 
 namespace Clunker
 {
-    public interface Applicable<Result>
+	public interface Applicable<in Args, out Result>
 	{		
-		/// <summary>
-		/// Varag wrapper to <see cref="Applicable.applyOnArray"/>
-		/// </summary>
-		/// <param name="args">Arguments for the function as <c>params</c>
-		/// </param>
-		Result apply(params object[] args);
-
-		/// <summary>
-		/// Applies this function to the array of arguments.
-		/// </summary>
-		/// <returns>The result of applying this function to args.</returns>
-		/// <param name="args">Arguments for the function</param>
-		Result applyOnArray(object[] args);
+		Result apply(Args args);
     }
 }
 

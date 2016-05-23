@@ -208,14 +208,14 @@ namespace Clunker.Collections
 
 		public Maybe indexOf(object val)
 		{
-			Splat eq = a => a[0].Equals(val);
-			return indexWhere(new InternalDelegate(eq).asPredicate());
+			Unary eq = a => a.Equals(val);
+			return indexWhere(new UnaryFunction(eq).asPredicate());
 		}
 
 		public Maybe lastIndexOf(object val)
 		{
-			Splat eq = a => a[0].Equals(val);
-			return lastIndexWhere(new InternalDelegate(eq).asPredicate());
+			Unary eq = a => a.Equals(val);
+			return lastIndexWhere(new UnaryFunction(eq).asPredicate());
 		}
 
 		public Maybe find(Pred pred)

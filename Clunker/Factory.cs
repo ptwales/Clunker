@@ -64,9 +64,19 @@ namespace Clunker
 			return new None();
 		}
 
-		public Func internalDelegate(Splat s)
+		public Func varagFunc(Splat s)
 		{
-			return new InternalDelegate(s);
+			return new VariadicFunction(s);
+		}
+
+		public Func1 unaryFunc(Unary f)
+		{
+			return new UnaryFunction(f);
+		}
+
+		public Pred predicate(Unary f)
+		{
+			return unaryFunc(f).asPredicate();
 		}
 
 		/// <summary>
