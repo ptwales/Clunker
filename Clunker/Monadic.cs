@@ -9,7 +9,7 @@ namespace Clunker
 		/// of applying f to the elements of this monad.
 		/// </summary>
 		/// <param name="f">Function to apply to all elements</param>
-		Monad map(FuncN f);
+		Monad map(Func1 f);
 
 		/// <summary>
 		/// Return a new monad where all elements are the elements of 
@@ -17,7 +17,7 @@ namespace Clunker
 		/// this monad.
 		/// </summary>
 		/// <param name="f">Function that must return a monad.</param>
-		Monad flatMap(FuncN f);
+		Monad flatMap(Func1 f);
 
 		/// <summary>
 		/// Return a copy with only elements that statisfy the predicate.

@@ -63,17 +63,17 @@ namespace Clunker.Collections
 
 		public override int countWhere(Pred pred)
 		{
-			return _list.Count(x => pred.apply(x));
+			return _list.Count(x => pred.apply(x)); // somehow takes Func not Predicate???
 		}
 
 		// ---------------- Monadic ----------------------
 
-		public override Seq map(FuncN f)
+		public override Seq map(Func1 f)
 		{
-			return new List(_list.Select(x => f.apply(x)));
+			return new List(_list.Select(f.asDelegate()));
 		}
 
-		public override Seq flatMap(FuncN f)
+		public override Seq flatMap(Func1 f)
 		{
 			return new List(_list.SelectMany(x => (IEnumerable<object>)f.apply(x)));
 		}

@@ -106,7 +106,7 @@ namespace Clunker
 		/// </summary>
 		/// <returns><c>Some(f.apply(boxed))</c></returns>
 		/// <param name="f">The function to apply</param>
-		public Maybe map(FuncN f)
+		public Maybe map(Func1 f)
 		{
 			var result = f.apply(_boxed);
 			return new Some(result);
@@ -121,7 +121,7 @@ namespace Clunker
 		/// of applying f to the contained object.</returns>
 		/// <param name="f">The function to apply.  It must return a 
 		/// <see cref="Clunker.Maybe"/></param>
-		public Maybe flatMap(FuncN f)
+		public Maybe flatMap(Func1 f)
 		{
 			return (Maybe)f.apply(_boxed);
 		}
@@ -198,7 +198,7 @@ namespace Clunker
 		/// </summary>
 		/// <param name="f">Function to apply to the contained object if this
 		/// was a <see cref="Some"/>.</param>
-		public Maybe map(FuncN f)
+		public Maybe map(Func1 f)
 		{
 			return this;
 		}
@@ -208,7 +208,7 @@ namespace Clunker
 		/// </summary>
 		/// <param name="f">Function to apply to the contained object if this
 		/// was a <see cref="Some"/>.</param>
-		public Maybe flatMap(FuncN f)
+		public Maybe flatMap(Func1 f)
 		{
 			return this;
 		}

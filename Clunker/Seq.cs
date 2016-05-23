@@ -220,12 +220,12 @@ namespace Clunker.Collections
 
 		public Maybe find(Pred pred)
 		{
-			return indexWhere(pred).map(new OnArgs(this, "item"));
+			return indexWhere(pred).map(new OnArgs(this, "item").asUnary());
 		}
 
 		public Maybe findLast(Pred pred)
 		{
-			return lastIndexWhere(pred).map(new OnArgs(this, "item"));
+			return lastIndexWhere(pred).map(new OnArgs(this, "item").asUnary());
 		}
 
 		protected Maybe findResult(int result, int invalid)
@@ -257,9 +257,9 @@ namespace Clunker.Collections
 
 		// ------------------ Monadic ---------------------
 
-		public abstract Seq map(FuncN f);
+		public abstract Seq map(Func1 f);
 
-		public abstract Seq flatMap(FuncN f);
+		public abstract Seq flatMap(Func1 f);
 
 		public abstract Seq filter(Pred p);
 
