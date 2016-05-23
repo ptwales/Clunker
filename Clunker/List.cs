@@ -66,6 +66,11 @@ namespace Clunker.Collections
 			return _list.Count(x => pred.apply(x)); // somehow takes Func not Predicate???
 		}
 
+		public override object foldLeft(object z, Func2 acc)
+		{
+			return _list.Aggregate(z, acc.asDelegate());
+		}
+
 		// ---------------- Monadic ----------------------
 
 		public override Seq map(Func1 f)

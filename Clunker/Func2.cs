@@ -3,7 +3,7 @@ using System.Runtime.InteropServices;
 
 namespace Clunker
 {
-	public delegate object Accum(object x,object y);
+	using Accum = Func<object, object, object>;
 
 	public interface Func2
 	{

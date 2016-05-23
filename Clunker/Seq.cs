@@ -148,9 +148,9 @@ namespace Clunker.Collections
 		//Seq dropLeft(int n);
 		//Seq dropRight(int n);
 		//Seq dropWhile(Pred p);
-		//object foldLeft(object z, Func2 f);
+		object foldLeft(object z, Func2 f);
 		//object foldRight(object z, Func2 f);
-		//object reduceLeft(Func2 f);
+		object reduceLeft(Func2 f);
 		//object reduceRight(Func2 f);
 
 		//Tuple partition(Pred p);
@@ -254,6 +254,13 @@ namespace Clunker.Collections
 		public abstract Maybe lastIndexWhere(Pred pred);
 
 		public abstract int countWhere(Pred pred);
+
+		public abstract object foldLeft(object x, Func2 acc);
+
+		public object reduceLeft(Func2 acc)
+		{
+			return tail().foldLeft(head(), acc);
+		}
 
 		// ------------------ Monadic ---------------------
 
