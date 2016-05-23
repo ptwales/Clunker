@@ -3,14 +3,14 @@ using System.Runtime.InteropServices;
 
 namespace Clunker
 {
-	public interface Func : Applicable<object[], object>
+	public interface Func
 	{
 		/// <summary>
 		/// Varag wrapper to <see cref="Clunker.Applicable.applyOnArray"/>
 		/// </summary>
 		/// <param name="args">Arguments for the function as <c>params</c>
 		/// </param>
-		new object apply(params object[] args);
+		object apply(params object[] args);
 
 		/// <summary>
 		/// Create a <see cref="Clunker.Partial"/> function with stored 
@@ -30,7 +30,7 @@ namespace Clunker
 
 		Func1 asUnary();
 
-		Func1 pack();
+		Func1 tupled();
 		//Func2 asBinary();
 	}
 
@@ -67,12 +67,29 @@ namespace Clunker
 			return new UnaryFunction(x => this.apply(x));
 		}
 
-		public Func1 pack()
+		public Func1 tupled()
 		{
 			return new UnaryFunction(t => this.apply(((Tuple)t).explode()));
 		}
 	}
 
+	public delegate object Splat(object[] args);
+
+	[ClassInterface(ClassInterfaceType.AutoDual)]
+	class VariadicFunction : AbstractFunction
+	{
+		Splat _splat;
+
+		public VariadicFunction(Splat splat)
+		{
+			_splat = splat;
+		}
+
+		public override object apply(params object[] args)
+		{
+			return _splat(args);
+		}
+	}
 
 	[ClassInterface(ClassInterfaceType.AutoDual)]
 	class Partial : AbstractFunction

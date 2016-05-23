@@ -2,9 +2,12 @@
 
 namespace Clunker
 {
-	public interface Func1 : Applicable<object, object>
+	public delegate object Unary(object arg);
+
+	public interface Func1
 	{
-		
+		object apply(object x);
+
 		Pred asPredicate();
 
 		/// <summary>
@@ -77,6 +80,21 @@ namespace Clunker
 		public Pred asPredicate()
 		{
 			return new PredFunc(this);
+		}
+	}
+
+	class UnaryFunction : AbstractUnaryFunction
+	{
+		Unary _unary;
+
+		public UnaryFunction(Unary unary)
+		{
+			_unary = unary;
+		}
+
+		public override object apply(object arg)
+		{
+			return _unary(arg);
 		}
 	}
 

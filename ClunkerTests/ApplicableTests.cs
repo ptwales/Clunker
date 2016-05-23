@@ -8,9 +8,8 @@ namespace ClunkerTests
     public class ApplicableTests
     {
         private static Factory clunk = new Factory();
-        private static Applicable<object[], object> app = clunk.varagFunc(
-                                                              a => a[0].Equals(a[1]));
-        private static Func func = (Func)app;
+        private static Func func = clunk.varagFunc(
+                                       a => a[0].Equals(a[1]));
         private static Func1 func1 = func.asUnary();
         //private static Func2 func2 = func.asBinary();
         private static Pred pred = func1.asPredicate();

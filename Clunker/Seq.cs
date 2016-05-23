@@ -148,10 +148,10 @@ namespace Clunker.Collections
 		//Seq dropLeft(int n);
 		//Seq dropRight(int n);
 		//Seq dropWhile(Pred p);
-		//object foldLeft(object z, Func f);
-		//object foldRight(object z, Func f);
-		//object reduceLeft(Func f);
-		//object reduceRight(Func f);
+		//object foldLeft(object z, Func2 f);
+		//object foldRight(object z, Func2 f);
+		//object reduceLeft(Func2 f);
+		//object reduceRight(Func2 f);
 
 		//Tuple partition(Pred p);
 
