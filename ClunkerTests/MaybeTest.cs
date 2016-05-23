@@ -35,7 +35,7 @@ namespace ClunkerTests
                 Assert.Fail("Didn't raise an exception at all.");
             } catch (ArgumentNullException ane) {
                 Assert.Pass("Raised expected exception: " + ane.ToString());
-            } catch(Exception e) {
+            } catch (Exception e) {
                 Assert.Fail("Raised unknown exception: " + e.ToString());
             }
         }

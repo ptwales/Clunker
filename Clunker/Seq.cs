@@ -3,7 +3,7 @@
 namespace Clunker.Collections
 {
 	public interface Seq : Monadic<Seq>, Transversable, Showable
-    {
+	{
 		/// <summary>
 		/// Return the lowest valid index of the sequence.
 		/// </summary>
@@ -163,7 +163,7 @@ namespace Clunker.Collections
 		//Iter sliding(int size, int step);
 		//Iter sliding(int size);
 		//Iter grouped(int size);
-    }
+	}
 
 	public abstract class AbstractSequence : Seq
 	{
@@ -197,7 +197,7 @@ namespace Clunker.Collections
 			}
 		}
 
-		public Maybe maybeLast() 
+		public Maybe maybeLast()
 		{
 			if (!isEmpty()) {
 				return new Some(last());
@@ -258,7 +258,9 @@ namespace Clunker.Collections
 		// ------------------ Monadic ---------------------
 
 		public abstract Seq map(Func f);
+
 		public abstract Seq flatMap(Func f);
+
 		public abstract Seq filter(Pred p);
 
 		// ------------------ Showable --------------------

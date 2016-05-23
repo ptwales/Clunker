@@ -3,8 +3,8 @@ using System.Runtime.InteropServices;
 
 namespace Clunker
 {
-    [ClassInterface(ClassInterfaceType.AutoDual)]
-    public class Tuple : Showable
+	[ClassInterface(ClassInterfaceType.AutoDual)]
+	public class Tuple : Showable
 	{
 		private object[] _elements;
 
@@ -87,7 +87,7 @@ namespace Clunker
 		private Exception incorrectTargetCount(int targetCount)
 		{
 			string msg = String.Format("Incorrect target count: expected {0}, received {1}.", 
-				_elements.Length, targetCount);
+				             _elements.Length, targetCount);
 			return new ArgumentException(msg);
 		}
 

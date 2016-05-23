@@ -100,7 +100,7 @@ namespace Clunker
 		{
 			return new OnObject(method, args);
 		}
-	
+
 		/// <summary>
 		/// Creates a instance of an <see cref="Tuple"/>, containing 
 		/// the given elements.

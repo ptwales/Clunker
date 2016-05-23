@@ -45,7 +45,7 @@ namespace Clunker
 		private static string showElement(object element)
 		{
 			if (isArray(element)) {
-				return showArray((object[]) element);
+				return showArray((object[])element);
 			} else if (isShowable(element)) {
 				Showable s = (Showable)element;
 				return s.show();
@@ -61,7 +61,7 @@ namespace Clunker
 			return string.Format("{0}[{1}]", typeName, shownMembers);
 		}
 
-		private static bool isShowable(object element) 
+		private static bool isShowable(object element)
 		{
 			Type showType = typeof(Showable);
 			Type elType = element.GetType();

@@ -14,7 +14,7 @@ namespace ClunkerTests
     [TestFixture()]
     public class ListTest
     {
-        private static object[] _array = new object[] {'a', "b", 0 };
+        private static object[] _array = new object[] { 'a', "b", 0 };
         private static int aLower = 0;
         private static int aUpper = _array.Length - 1;
         private static Factory f = new Factory();

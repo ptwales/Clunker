@@ -22,7 +22,7 @@ namespace ClunkerTests
         [Test()]
         public void operationTest()
         {
-            Splat s = a => (string) a[0] + (string) a[1];
+            Splat s = a => (string)a[0] + (string)a[1];
             Func f = factory.varagFunc(s);
             Assert.AreEqual("ab", f.apply("a", "b"));
         }
@@ -32,8 +32,8 @@ namespace ClunkerTests
         {
             Splat s = a => a[0].Equals(a[1]);
             Func f = factory.varagFunc(s);
-            Assert.IsTrue((bool) f.apply(1, 1));
-            Assert.IsFalse((bool) f.apply(1, 0));
+            Assert.IsTrue((bool)f.apply(1, 1));
+            Assert.IsFalse((bool)f.apply(1, 0));
         }
 
         [Test()]

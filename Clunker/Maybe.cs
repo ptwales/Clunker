@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 namespace Clunker
 {
     
-    public interface Maybe : Monadic<Maybe>, Showable
+	public interface Maybe : Monadic<Maybe>, Showable
 	{
 		/// <summary>
 		/// Returns <c>true</c> if is <see cref="Some"/>,
@@ -38,8 +38,8 @@ namespace Clunker
 		/// <param name="other">Other.</param>
 		object getOrElse(object other);
 	}
-	
-    [ClassInterface(ClassInterfaceType.AutoDual)]	
+
+	[ClassInterface(ClassInterfaceType.AutoDual)]	
 	class Some : Maybe
 	{
 		/// <summary>
@@ -123,7 +123,7 @@ namespace Clunker
 		/// <see cref="Clunker.Maybe"/></param>
 		public Maybe flatMap(Func f)
 		{
-			return (Maybe) f.apply(_boxed);
+			return (Maybe)f.apply(_boxed);
 		}
 
 		public Maybe filter(Pred p)
@@ -144,8 +144,8 @@ namespace Clunker
 			return DefShow.showParameters(this, _boxed);
 		}
 	}
-	
-    [ClassInterface(ClassInterfaceType.AutoDual)]	
+
+	[ClassInterface(ClassInterfaceType.AutoDual)]	
 	class None : Maybe
 	{
 		/// <summary>

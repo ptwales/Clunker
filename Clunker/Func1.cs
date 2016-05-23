@@ -3,10 +3,10 @@
 namespace Clunker
 {
 	public interface Func1 : Applicable<object, object>
-    {
+	{
 		
 		Pred asPredicate();
-		
+
 		/// <summary>
 		/// Compose another function inside this function.
 		/// </summary>
@@ -34,7 +34,7 @@ namespace Clunker
 		/// </returns>
 		/// <param name="outer">Function with this will be composed.</param>
 		Func1 andThen(Func1 outer);
- 	}
+	}
 
 	abstract class AbstractUnaryFunction : Func1
 	{
@@ -79,7 +79,7 @@ namespace Clunker
 			return new PredFunc(this);
 		}
 	}
-		
+
 	class Composed : AbstractUnaryFunction
 	{
 		private Func1 _inner;

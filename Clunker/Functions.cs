@@ -4,20 +4,20 @@ namespace Clunker
 {
 	public delegate object Splat(object[] args);
 
-    class VariadicFunction : AbstractFunction
-    {
+	class VariadicFunction : AbstractFunction
+	{
 		Splat _splat;
 
 		public VariadicFunction(Splat splat)
-        {
+		{
 			_splat = splat;
-        }
+		}
 
 		public override object apply(params object[] args)
 		{
 			return _splat(args);
 		}
-    }
+	}
 
 	public delegate object Unary(object arg);
 

@@ -57,7 +57,7 @@ namespace ClunkerTests
         {
             Tuple t = f.pack(2, 4, 6);
             object x, y, z;
-            t.unpack(out x, out y,out z);
+            t.unpack(out x, out y, out z);
         
             Assert.AreEqual(2, x);
             Assert.AreEqual(4, y);

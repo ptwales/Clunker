@@ -2,7 +2,7 @@
 
 namespace Clunker
 {
-	public interface Monadic<Monad> 
+	public interface Monadic<Monad>
 	{
 		/// <summary>
 		/// Return a new monad where all elements are the results

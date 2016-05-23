@@ -29,6 +29,7 @@ namespace Clunker
 		Func asPartial(object[] partialArgs);
 
 		Func1 asUnary();
+
 		Func1 pack();
 		//Func2 asBinary();
 	}
@@ -125,8 +126,8 @@ namespace Clunker
 				return _function.apply(usedArgs);
 			} else {
 				var message = string.Format("Too many arguments received.  Expected: {0}, recieved: {1}",
-					                          a + 1,
-					                          args.Length);
+					              a + 1,
+					              args.Length);
 				throw new ArgumentException(message, "args");
 			}
                 
