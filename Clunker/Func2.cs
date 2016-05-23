@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.InteropServices;
 
 namespace Clunker
 {
@@ -7,10 +8,24 @@ namespace Clunker
 	public interface Func2
 	{
 		object apply(object x, object y);
+
+		Accum asDelegate();
 		//Func1 tupled();
 	}
 
-	class BinaryFunction : Func2
+	abstract class AbstractBinaryFunction : Func2
+	{
+		public abstract object apply(object x, object y);
+
+		public virtual Accum asDelegate()
+		{
+			return (x, y) => this.apply(x, y);
+		}
+
+	}
+
+	[ClassInterface(ClassInterfaceType.AutoDual)]
+	class BinaryFunction : AbstractBinaryFunction
 	{
 		Accum _a;
 
@@ -19,9 +34,14 @@ namespace Clunker
 			_a = a;
 		}
 
-		public object apply(object x, object y)
+		public override object apply(object x, object y)
 		{
 			return _a(x, y);
+		}
+
+		public override Accum asDelegate()
+		{
+			return _a;
 		}
 	}
 }

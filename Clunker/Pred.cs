@@ -1,42 +1,52 @@
 ﻿using System;
+using System.Runtime.InteropServices;
 
 namespace Clunker
 {
-	//public delegate bool Predicate(object arg);
+	public delegate bool Predicate(object arg);
 
 	public interface Pred
 	{
 		bool apply(object arg);
 
 		Func1 asUnary();
+
+		Predicate asDelegate();
 	}
 
+	[ClassInterface(ClassInterfaceType.AutoDual)]
 	class PredFunc : Pred
 	{
-		Func1 _f;
+		Predicate _pred;
 
-		public PredFunc(Func1 f)
+		public PredFunc(Predicate pred)
 		{
-			_f = f;
+			_pred = pred;
 		}
 
-		//public PredFunc(Predicate p)
-		//{
-		//}
-
-		public PredFunc(Unary f)
+		public PredFunc(Unary func)
 		{
-			_f = new UnaryFunction(f);
+			_pred = x => (bool)func(x);
+		}
+
+		public PredFunc(Func1 func)
+			: this(func.asDelegate())
+		{
 		}
 
 		public bool apply(object arg)
 		{
-			return (bool)_f.apply(arg);
+			return (bool)_pred(arg);
 		}
 
-		public  Func1 asUnary()
+		public Func1 asUnary()
 		{
-			return _f;
+			return new UnaryFunction(x => (object)_pred(x));
+		}
+
+		public Predicate asDelegate()
+		{
+			return _pred;
 		}
 	}
 }

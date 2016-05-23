@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.InteropServices;
 
 namespace Clunker
 {
@@ -9,6 +10,8 @@ namespace Clunker
 		object apply(object x);
 
 		Pred asPredicate();
+
+		Unary asDelegate();
 
 		/// <summary>
 		/// Compose another function inside this function.
@@ -81,8 +84,14 @@ namespace Clunker
 		{
 			return new PredFunc(this);
 		}
+
+		public virtual Unary asDelegate()
+		{
+			return x => this.apply(x);
+		}
 	}
 
+	[ClassInterface(ClassInterfaceType.AutoDual)]
 	class UnaryFunction : AbstractUnaryFunction
 	{
 		Unary _unary;
@@ -96,8 +105,14 @@ namespace Clunker
 		{
 			return _unary(arg);
 		}
+
+		public override Unary asDelegate()
+		{
+			return _unary;
+		}
 	}
 
+	[ClassInterface(ClassInterfaceType.AutoDual)]
 	class Composed : AbstractUnaryFunction
 	{
 		private Func1 _inner;
