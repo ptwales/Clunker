@@ -13,7 +13,7 @@ namespace Clunker
 			_splat = splat;
         }
 
-		public override object applyOnArray(object[] args)
+		public override object apply(params object[] args)
 		{
 			return _splat(args);
 		}

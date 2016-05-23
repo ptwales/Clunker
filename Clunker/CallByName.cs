@@ -30,7 +30,7 @@ namespace Clunker
 		/// <remarks><c>obj.method(args)</c></remarks>
 		/// <returns>The result of applying this method to args.</returns>
 		/// <param name="args">Arguments for the method</param>
-		public override object applyOnArray(object[] args)
+		public override object apply(params object[] args)
 		{
 			return _method.Invoke(_obj, args);
 		}
@@ -67,7 +67,7 @@ namespace Clunker
 		/// </summary>
 		/// <returns>The result of applying the method.</returns>
 		/// <param name="args">An array of a single object.</param>
-		public override object applyOnArray(object[] args)
+		public override object apply(params object[] args)
 		{
 			// TODO: assert args is size 1;
 			var obj = args[0];

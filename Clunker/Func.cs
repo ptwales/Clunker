@@ -12,8 +12,6 @@ namespace Clunker
 		/// </param>
 		new object apply(params object[] args);
 
-		object applyOnArray(object[] args);
-
 		/// <summary>
 		/// Create a <see cref="Clunker.Partial"/> function with stored 
 		/// arguments.
@@ -31,29 +29,18 @@ namespace Clunker
 		Func asPartial(object[] partialArgs);
 
 		Func1 asUnary();
+		Func1 pack();
 		//Func2 asBinary();
 	}
 
 	abstract class AbstractFunction : Func
 	{
 		/// <summary>
-		/// Varag wrapper to <see cref="Clunker.Applicable.applyOnArray"/>
-		/// </summary>
-		/// <param name="args">Arguments for the function as <c>params</c>
-		/// </param>
-		public object apply(params object[] args)
-		{
-			return applyOnArray(args);
-		}
-
-		/// <summary>
 		/// Applies this function to the array of arguments.
 		/// </summary>
 		/// <returns>The result of applying this function to args.</returns>
 		/// <param name="args">Arguments for the function</param>
-		public abstract object applyOnArray(object[] args);
-
-
+		public abstract object apply(params object[] args);
 
 		/// <summary>
 		/// Create a <see cref="Clunker.Partial"/> function with stored 
@@ -78,7 +65,11 @@ namespace Clunker
 		{
 			return new UnaryFunction(x => this.apply(x));
 		}
-			
+
+		public Func1 pack()
+		{
+			return new UnaryFunction(t => this.apply(((Tuple)t).explode()));
+		}
 	}
 
 
@@ -114,7 +105,7 @@ namespace Clunker
 		/// <returns>The result of the partial function with the given arguments.
 		/// </returns>
 		/// <param name="args">Remaining arguments.</param>
-		public override object applyOnArray(object[] args)
+		public override object apply(params object[] args)
 		{
 
 			object[] usedArgs = new object[_partialArgs.Length];
@@ -131,7 +122,7 @@ namespace Clunker
 			}
 
 			if (a == args.Length - 1) {
-				return _function.applyOnArray(usedArgs);
+				return _function.apply(usedArgs);
 			} else {
 				var message = string.Format("Too many arguments received.  Expected: {0}, recieved: {1}",
 					                          a + 1,
