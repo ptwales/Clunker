@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 namespace Clunker
 {
 	[ClassInterface(ClassInterfaceType.AutoDual)]
-	public class Tuple : Showable
+	public class Tup : Showable
 	{
 		private object[] _elements;
 
@@ -12,7 +12,7 @@ namespace Clunker
 		/// Initializes a new instance of the <see cref="Clunker.Tuple"/> class.
 		/// </summary>
 		/// <param name="elements">Elements to contain in the tuple.</param>
-		public Tuple(params object[] elements)
+		public Tup(params object[] elements)
 		{
 			_elements = new object[elements.Length];
 			Array.Copy(elements, _elements, elements.Length);

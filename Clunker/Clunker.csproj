@@ -46,7 +46,6 @@
     <Compile Include="Showable.cs" />
     <Compile Include="CallByName.cs" />
     <Compile Include="Assoc.cs" />
-    <Compile Include="Tuple.cs" />
     <Compile Include="List.cs" />
     <Compile Include="Seq.cs" />
     <Compile Include="Transversable.cs" />
@@ -54,6 +53,7 @@
     <Compile Include="Pred.cs" />
     <Compile Include="Func2.cs" />
     <Compile Include="FuncN.cs" />
+    <Compile Include="Tup.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

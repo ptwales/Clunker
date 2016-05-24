@@ -74,6 +74,11 @@ namespace Clunker
 			return new UnaryFunction(f);
 		}
 
+		public Func2 binaryFunc(Func<object, object, object> f)
+		{
+			return new BinaryFunction(f);
+		}
+
 		public Pred predicate(Func<object, object> f)
 		{
 			return unaryFunc(f).asPredicate();
@@ -107,9 +112,9 @@ namespace Clunker
 		/// </summary>
 		/// <returns>A new <see cref="Clunker.Tuple"/>
 		/// <param name="elements">Elements to include in the tuple.</param>
-		public Tuple pack(params object[] elements)
+		public Tup pack(params object[] elements)
 		{
-			return new Tuple(elements);
+			return new Tup(elements);
 		}
 
 		/// <summary>

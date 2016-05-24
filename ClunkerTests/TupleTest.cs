@@ -4,7 +4,7 @@ using Clunker;
 
 namespace ClunkerTests
 {
-    using Tuple = Clunker.Tuple;
+    using Tuple = Clunker.Tup;
 
     [TestFixture()]
     public class TupleTest
@@ -14,7 +14,7 @@ namespace ClunkerTests
         [Test()]
         public void emptyPack()
         {
-            Tuple t = f.pack();
+            Tup t = f.pack();
             Assert.AreEqual(0, t.size());
             Assert.AreEqual(0, t.explode().Length);
         }
@@ -22,7 +22,7 @@ namespace ClunkerTests
         [Test()]
         public void singlePack()
         {
-            Tuple t = f.pack(13);
+            Tup t = f.pack(13);
             Assert.AreEqual(1, t.size());
             Assert.AreEqual(13, t.item(0));
             Assert.AreEqual(new object[] { 13 }, t.explode());
@@ -31,7 +31,7 @@ namespace ClunkerTests
         [Test()]
         public void singleUnpack()
         {
-            Tuple t = f.pack(13);
+            Tup t = f.pack(13);
           
             object target;
             t.unpack(out target);
@@ -43,7 +43,7 @@ namespace ClunkerTests
         [Test()]
         public void multiplePack()
         {
-            Tuple t = f.pack(2, 4, 6);
+            Tup t = f.pack(2, 4, 6);
             Assert.AreEqual(3, t.size());
             Assert.AreEqual(6, t.item(2));
 
@@ -55,7 +55,7 @@ namespace ClunkerTests
         [Test()]
         public void multipleUnPack()
         {
-            Tuple t = f.pack(2, 4, 6);
+            Tup t = f.pack(2, 4, 6);
             object x, y, z;
             t.unpack(out x, out y, out z);
         

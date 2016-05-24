@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 namespace Clunker
 {
 	using Splat = Func<object[], object>;
-	
+
 	public interface FuncN
 	{
 		/// <summary>
@@ -28,12 +28,11 @@ namespace Clunker
 		/// <returns>A partially applied function.</returns>
 		/// <param name="partialArgs">Some arguments with <c>null</c> for 
 		/// missing args.</param>
-		FuncN asPartial(object[] partialArgs);
+		FuncN asPartial(params object[] partialArgs);
 
 		Func1 asUnary();
 
 		Func1 tupled();
-		//Func2 asBinary();
 	}
 
 	abstract class AbstractFunction : FuncN
@@ -71,7 +70,7 @@ namespace Clunker
 
 		public Func1 tupled()
 		{
-			return new UnaryFunction(t => this.apply(((Tuple)t).explode()));
+			return new UnaryFunction(t => this.apply(((Tup)t).explode()));
 		}
 	}
 
@@ -96,6 +95,7 @@ namespace Clunker
 	{
 		private FuncN _function;
 		private object[] _partialArgs;
+		private int _argCount;
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="Clunker.Partial"/> 
@@ -108,6 +108,7 @@ namespace Clunker
 		{
 			_function = function;
 			_partialArgs = partialArgs;
+			_argCount = _partialArgs.Length;
 		}
 
 		/// <summary>
@@ -126,10 +127,10 @@ namespace Clunker
 		public override object apply(params object[] args)
 		{
 
-			object[] usedArgs = new object[_partialArgs.Length];
+			object[] usedArgs = new object[_argCount];
 			var a = 0;
 
-			for (int p = 0; p < _partialArgs.Length; ++p) {
+			for (int p = 0; p < _argCount; ++p) {
 
 				if (_partialArgs[p] == null) {
 					usedArgs[p] = args[a];
@@ -139,11 +140,11 @@ namespace Clunker
 				}
 			}
 
-			if (a == args.Length - 1) {
+			if (a == args.Length) {
 				return _function.apply(usedArgs);
 			} else {
 				var message = string.Format("Too many arguments received.  Expected: {0}, recieved: {1}",
-					              a + 1,
+					              a,
 					              args.Length);
 				throw new ArgumentException(message, "args");
 			}
