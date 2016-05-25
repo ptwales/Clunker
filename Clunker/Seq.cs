@@ -2,7 +2,7 @@
 
 namespace Clunker.Collections
 {
-	public interface Seq : Monadic<Seq>, Transversable, Showable
+	public interface Seq : Monadic<Seq>, Iterable, Showable
 	{
 		/// <summary>
 		/// Return the lowest valid index of the sequence.
@@ -165,7 +165,7 @@ namespace Clunker.Collections
 		//Iter grouped(int size);
 	}
 
-	public abstract class AbstractSequence : Seq
+	public abstract class AbstractSequence : AbstractIterable, Seq
 	{
 		// ---------------- Linear -------------------------
 		public int size()

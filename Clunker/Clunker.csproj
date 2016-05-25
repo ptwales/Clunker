@@ -54,6 +54,8 @@
     <Compile Include="Func2.cs" />
     <Compile Include="FuncN.cs" />
     <Compile Include="Tup.cs" />
+    <Compile Include="Iterator.cs" />
+    <Compile Include="Iterable.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
