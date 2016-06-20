@@ -103,39 +103,6 @@ namespace Clunker.Collections
 			return upperBound() - lowerBound() + 1;
 		}
 
-		override public object head()
-		{
-			return item(lowerBound());
-		}
-
-		override public object last()
-		{
-			return item(upperBound());
-		}
-
-		override public bool isEmpty()
-		{
-			return size() == 0;
-		}
-
-		override public Maybe maybeHead()
-		{
-			if (!isEmpty()) {
-				return new Some(head());
-			} else {
-				return new None();
-			}
-		}
-
-		override public Maybe maybeLast()
-		{
-			if (!isEmpty()) {
-				return new Some(last());
-			} else {
-				return new None();
-			}
-		}
-
 		public Maybe indexOf(object val)
 		{
 			Predicate<object> eq = a => a.Equals(val);
@@ -146,16 +113,6 @@ namespace Clunker.Collections
 		{
 			Predicate<object> eq = a => a.Equals(val);
 			return lastIndexWhere(new PredFunc(eq));
-		}
-
-		override public Maybe find(Pred pred)
-		{
-			return indexWhere(pred).map(new OnArgs(this, "item").asUnary());
-		}
-
-		override public Maybe findLast(Pred pred)
-		{
-			return lastIndexWhere(pred).map(new OnArgs(this, "item").asUnary());
 		}
 
 		protected Maybe findResult(int result, int invalid)
@@ -182,15 +139,6 @@ namespace Clunker.Collections
 		public abstract Maybe indexWhere(Pred pred);
 
 		public abstract Maybe lastIndexWhere(Pred pred);
-
-		override public abstract int countWhere(Pred pred);
-
-		override public abstract object foldLeft(object x, Func2 acc);
-
-		override public object reduceLeft(Func2 acc)
-		{
-			return tail().foldLeft(head(), acc);
-		}
 
 		// ------------------ Monadic ---------------------
 
