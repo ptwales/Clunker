@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Clunker.Collections
 {
@@ -22,22 +24,16 @@ namespace Clunker.Collections
 		int size();
 
 		/// <summary>
-		/// Check if the object has no elements.
-		/// </summary>
-		/// <returns><c>true</c>, if the object is empty <c>false</c>
-		///  otherwise.</returns>
-		bool isEmpty();
-
-		/// <summary>
 		/// Return the item at the index.
 		/// </summary>
 		/// <param name="index">Index of the sought item.</param>
 		object item(int index);
 
 		/// <summary>
-		/// Return the first element of this sequence.
+		/// Create an array containing the same elements
 		/// </summary>
-		object head();
+		/// <returns>This object as an array.</returns>
+		object[] toArray();
 
 		/// <summary>
 		/// Return the rest of the sequence after the first element.
@@ -48,34 +44,6 @@ namespace Clunker.Collections
 		/// Return the sequence without the last element.
 		/// </summary>
 		Seq init();
-
-		/// <summary>
-		/// Return the last element in the sequence.
-		/// </summary>
-		object last();
-
-		/// <summary>
-		/// Return a <see cref="Clunker.Some"/> containing the first
-		/// element, or <see cref="Clunker.None"/>, if the sequence is
-		/// empty.
-		/// </summary>
-		/// <returns>Maybe the first element.</returns>
-		Maybe maybeHead();
-
-		/// <summary>
-		/// Return a <see cref="Clunker.Some"/> containing the last
-		/// element, or <see cref="Clunker.None"/>, if the sequence is
-		/// empty.
-		/// </summary>
-		/// <returns>Maybe the last element.</returns>
-		Maybe maybeLast();
-
-
-		/// <summary>
-		/// Create an array containing the same elements
-		/// </summary>
-		/// <returns>This object as an array.</returns>
-		object[] toArray();
 
 		/// <summary>
 		/// First index who's value satisfies the predicate as a 
@@ -115,44 +83,6 @@ namespace Clunker.Collections
 		/// <param name="val">Value sought.</param>
 		Maybe lastIndexOf(object val);
 
-		/// <summary>
-		/// Return the value of the first element that satisfies the
-		/// predicate as a <see cref="Clunker.Some"/> if found,
-		/// <see cref="Clunker.None"/> if no matches.
-		/// </summary>
-		/// <returns>Maybe the first element that satisfies the predicate
-		/// </returns>
-		/// <param name="pred">Predicate to check.</param>
-		Maybe find(Pred pred);
-
-		/// <summary>
-		/// Return the value of the last element that satisfies the
-		/// predicate as a <see cref="Clunker.Some"/> if found,
-		/// <see cref="Clunker.None"/> if no matches.
-		/// </summary>
-		/// <returns>Maybe the last element that satisfies the predicate
-		/// </returns>
-		/// <param name="pred">Predicate to check.</param>
-		Maybe findLast(Pred pred);
-
-		/// <summary>
-		/// Return the number of elements that satisfy a predicate.
-		/// </summary>
-		/// <returns>Count of elements that satisfy a predicate.</returns>
-		/// <param name="pred">Predicate to check.</param>
-		int countWhere(Pred pred);
-
-		//Seq takeLeft(int n);
-		//Seq takeRight(int n);
-		//Seq takeWhile(Pred p);
-		//Seq dropLeft(int n);
-		//Seq dropRight(int n);
-		//Seq dropWhile(Pred p);
-		object foldLeft(object z, Func2 f);
-		//object foldRight(object z, Func2 f);
-		object reduceLeft(Func2 f);
-		//object reduceRight(Func2 f);
-
 		//Tuple partition(Pred p);
 
 		// Seqs of Seqs should use iterators.
@@ -173,22 +103,22 @@ namespace Clunker.Collections
 			return upperBound() - lowerBound() + 1;
 		}
 
-		public object head()
+		override public object head()
 		{
 			return item(lowerBound());
 		}
 
-		public object last()
+		override public object last()
 		{
 			return item(upperBound());
 		}
 
-		public bool isEmpty()
+		override public bool isEmpty()
 		{
 			return size() == 0;
 		}
 
-		public Maybe maybeHead()
+		override public Maybe maybeHead()
 		{
 			if (!isEmpty()) {
 				return new Some(head());
@@ -197,7 +127,7 @@ namespace Clunker.Collections
 			}
 		}
 
-		public Maybe maybeLast()
+		override public Maybe maybeLast()
 		{
 			if (!isEmpty()) {
 				return new Some(last());
@@ -218,12 +148,12 @@ namespace Clunker.Collections
 			return lastIndexWhere(new PredFunc(eq));
 		}
 
-		public Maybe find(Pred pred)
+		override public Maybe find(Pred pred)
 		{
 			return indexWhere(pred).map(new OnArgs(this, "item").asUnary());
 		}
 
-		public Maybe findLast(Pred pred)
+		override public Maybe findLast(Pred pred)
 		{
 			return lastIndexWhere(pred).map(new OnArgs(this, "item").asUnary());
 		}
@@ -253,11 +183,11 @@ namespace Clunker.Collections
 
 		public abstract Maybe lastIndexWhere(Pred pred);
 
-		public abstract int countWhere(Pred pred);
+		override public abstract int countWhere(Pred pred);
 
-		public abstract object foldLeft(object x, Func2 acc);
+		override public abstract object foldLeft(object x, Func2 acc);
 
-		public object reduceLeft(Func2 acc)
+		override public object reduceLeft(Func2 acc)
 		{
 			return tail().foldLeft(head(), acc);
 		}

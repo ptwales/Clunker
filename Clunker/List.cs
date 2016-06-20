@@ -17,7 +17,14 @@ namespace Clunker.Collections
 			_list = new SysList(sequence);
 		}
 
-		// --------------- Linear ------------------------
+		// --------------- Iterable ----------------------
+
+		public override Iterator iterator()
+		{
+			return new Enumerator(_list.GetEnumerator());
+		}
+
+		// --------------- Seq ---------------------------
 
 		public override int lowerBound()
 		{

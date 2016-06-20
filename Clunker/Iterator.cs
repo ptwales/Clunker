@@ -1,19 +1,40 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Clunker.Collections
 {
-	// I don't know if I'm going to end up using this yet...
-
     public interface Iterator
     {
 		bool hasNext();
 		object next();
+		IEnumerator<object> enumerator();
     }
 
-	abstract class AbstractIterator : Iterator 
+	public class Enumerator: Iterator
 	{
-		public abstract bool hasNext();
-		public abstract object next();
+		private IEnumerator<object> _iter;
+		private bool _hasNext = false;
+
+		public Enumerator(IEnumerator<object> iter)
+		{
+			_iter = iter;
+		}
+
+		public bool hasNext() 
+		{
+			return _hasNext;
+		}
+
+		public object next()
+		{
+			_hasNext = _iter.MoveNext();
+			return _iter.Current;
+		}
+
+		public IEnumerator<object> enumerator()
+		{
+			return _iter;
+		}
 	}
 }
 
