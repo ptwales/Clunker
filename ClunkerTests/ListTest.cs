@@ -44,6 +44,13 @@ namespace ClunkerTests
         }
 
         [Test()]
+        public void isEmptyTest()
+        {
+            Assert.IsFalse(_list.isEmpty());
+            Assert.IsTrue(f.seq().isEmpty());
+        }
+
+        [Test()]
         public void tailTest()
         {
             Seq t = _list.tail();

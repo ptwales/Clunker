@@ -1,12 +1,21 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Collections;
 using System.Linq;
 
 namespace Clunker.Collections
 {
     public interface Iterator: Traversable
     {
+		/// <summary>
+		/// Check if there iterator has another value.
+		/// </summary>
+		/// <returns><c>true</c>, if there is another value <c>false</c> otherwise.</returns>
 		bool hasNext();
+
+		/// <summary>
+		/// Move the iterator to the next object and return that object.
+		/// </summary>
+		/// <returns>The next object.</returns>
 		object next();
     }
 
@@ -18,7 +27,7 @@ namespace Clunker.Collections
 
 		public bool isEmpty()
 		{
-			return hasNext();
+			return !hasNext();
 		}
 
 		public object head()
@@ -108,12 +117,14 @@ namespace Clunker.Collections
 
 	class Enumerator: AbstractIterator
 	{
-		private IEnumerator<object> _iter;
-		private bool _hasNext = false;
+		private IEnumerator _iter;
+		private object _next;
+		private bool _hasNext;
 
-		public Enumerator(IEnumerator<object> iter)
+		public Enumerator(IEnumerator iter)
 		{
 			_iter = iter;
+			next();
 		}
 
 		override public bool hasNext() 
@@ -123,8 +134,10 @@ namespace Clunker.Collections
 
 		override public object next()
 		{
+			object current = _next;
 			_hasNext = _iter.MoveNext();
-			return _iter.Current;
+			_next = _hasNext ? _iter.Current : null;
+			return current;
 		}
 	}
 }
