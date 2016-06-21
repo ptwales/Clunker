@@ -19,15 +19,17 @@ namespace Clunker.Collections
 		int upperBound();
 
 		/// <summary>
-		/// Size this instance.
-		/// </summary>
-		int size();
-
-		/// <summary>
 		/// Return the item at the index.
 		/// </summary>
 		/// <param name="index">Index of the sought item.</param>
 		object item(int index);
+
+		/// <summary>
+		/// Size this instance.
+		/// </summary>
+		int size();
+
+		// Not required
 
 		/// <summary>
 		/// Create an array containing the same elements
@@ -97,7 +99,16 @@ namespace Clunker.Collections
 
 	public abstract class AbstractSequence : AbstractIterable, Seq
 	{
-		// ---------------- Linear -------------------------
+		public abstract int lowerBound();
+		public abstract int upperBound();
+		public abstract object item(int index);
+
+		public abstract Seq tail();
+
+		public abstract Seq init();
+
+		public abstract object[] toArray();
+
 		public int size()
 		{
 			return upperBound() - lowerBound() + 1;
@@ -115,30 +126,25 @@ namespace Clunker.Collections
 			return lastIndexWhere(new PredFunc(eq));
 		}
 
-		protected Maybe findResult(int result, int invalid)
+		public Maybe indexWhere(Pred pred)
 		{
-			if (result != invalid) {
-				return new Some(result);
-			} else {
-				return new None();
+			for (int i = lowerBound(); i <= upperBound(); ++i) {
+				if (pred.apply(item(i))) {
+					return new Some(i);
+				}
 			}
+			return new None();
 		}
 
-		public abstract int lowerBound();
-
-		public abstract int upperBound();
-
-		public abstract object item(int index);
-
-		public abstract Seq tail();
-
-		public abstract Seq init();
-
-		public abstract object[] toArray();
-
-		public abstract Maybe indexWhere(Pred pred);
-
-		public abstract Maybe lastIndexWhere(Pred pred);
+		public Maybe lastIndexWhere(Pred pred)
+		{
+			for (int i = upperBound(); i >= lowerBound(); --i) {
+				if (pred.apply(item(i))) {
+					return new Some(i);
+				}
+			}
+			return new None();
+		}
 
 		// ------------------ Monadic ---------------------
 

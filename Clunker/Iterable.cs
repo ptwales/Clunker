@@ -6,7 +6,7 @@ namespace Clunker.Collections
     public interface Iterable: Traversable
     {
 		// move almost everything from Seq here.
-		Iterator iterator();
+		Iterator toIterator();
 
 		//Iterable takeLeft(int n);
 		//Iterable takeRight(int n);
@@ -18,58 +18,58 @@ namespace Clunker.Collections
 
 	public abstract class AbstractIterable : Iterable
 	{
-		public abstract Iterator iterator();
+		public abstract Iterator toIterator();
 
 		public bool isEmpty()
 		{
-			return iterator().isEmpty();
+			return toIterator().isEmpty();
 		}
 
 		public object head()
 		{
-			return iterator().head();
+			return toIterator().head();
 		}
 
 		public object last()
 		{
-			return iterator().last();
+			return toIterator().last();
 		}
 
 		public Maybe maybeHead()
 		{
-			return iterator().maybeHead();
+			return toIterator().maybeHead();
 		}
 
 		public Maybe maybeLast()
 		{
-			return iterator().maybeLast();
+			return toIterator().maybeLast();
 		}
 
 		public Maybe find(Pred pred)
 		{
-			return iterator().find(pred);
+			return toIterator().find(pred);
 		}
 
 		public Maybe findLast(Pred pred)
 		{
-			return iterator().findLast(pred);
+			return toIterator().findLast(pred);
 		}
 
 		public int countWhere(Pred pred)
 		{
-			return iterator().countWhere(pred);
+			return toIterator().countWhere(pred);
 		}
 			
 		public object foldLeft(object z, Func2 f)
 		{
-			return iterator().foldLeft(z, f);
+			return toIterator().foldLeft(z, f);
 		}
 
 		//object foldRight(object z, Func2 f);
 
 		public object reduceLeft(Func2 f)
 		{
-			return iterator().reduceLeft(f);
+			return toIterator().reduceLeft(f);
 		}
 
 		//object reduceRight(Func2 f);

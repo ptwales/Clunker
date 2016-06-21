@@ -19,7 +19,7 @@ namespace Clunker.Collections
 
 		// --------------- Iterable ----------------------
 
-		public override Iterator iterator()
+		public override Iterator toIterator()
 		{
 			return new Enumerator(_list.GetEnumerator());
 		}
@@ -54,18 +54,6 @@ namespace Clunker.Collections
 		public override object[] toArray()
 		{
 			return _list.ToArray();
-		}
-
-		public override Maybe indexWhere(Pred pred)
-		{
-			var result = _list.FindIndex(pred.asDelegate());
-			return findResult(result, -1);
-		}
-
-		public override Maybe lastIndexWhere(Pred pred)
-		{
-			var result = _list.FindLastIndex(pred.asDelegate());
-			return findResult(result, -1);
 		}
 
 		// ---------------- Monadic ----------------------
