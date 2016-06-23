@@ -13,7 +13,7 @@ namespace Clunker
 		//Func1 tupled();
 	}
 
-	abstract class AbstractBinaryFunction : Func2
+	public abstract class AbstractBinaryFunction : Func2
 	{
 		public abstract object apply(object x, object y);
 
@@ -25,7 +25,7 @@ namespace Clunker
 	}
 
 	[ClassInterface(ClassInterfaceType.AutoDual)]
-	class BinaryFunction : AbstractBinaryFunction
+    public class BinaryFunction : AbstractBinaryFunction
 	{
 		Accum _a;
 

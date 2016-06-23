@@ -43,7 +43,7 @@ namespace Clunker
 		Func1 andThen(Func1 outer);
 	}
 
-	abstract class AbstractUnaryFunction : Func1
+	public abstract class AbstractUnaryFunction : Func1
 	{
 		public abstract object apply(object arg);
 
@@ -93,7 +93,7 @@ namespace Clunker
 	}
 
 	[ClassInterface(ClassInterfaceType.AutoDual)]
-	class UnaryFunction : AbstractUnaryFunction
+	public class UnaryFunction : AbstractUnaryFunction
 	{
 		Unary _unary;
 

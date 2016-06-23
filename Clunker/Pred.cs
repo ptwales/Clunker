@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Linq;
-using System.Runtime.InteropServices;
 
 namespace Clunker
 {
@@ -13,8 +11,7 @@ namespace Clunker
 		Predicate<object> asDelegate();
 	}
 
-	[ClassInterface(ClassInterfaceType.AutoDual)]
-	class PredFunc : Pred
+	public class PredFunc : Pred
 	{
 		Predicate<object> _pred;
 

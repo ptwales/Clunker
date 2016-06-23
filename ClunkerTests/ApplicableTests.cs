@@ -9,13 +9,13 @@ namespace ClunkerTests
     [TestFixture()]
     public class ApplicableTests
     {
-        private static Factory clunk = new Factory();
-        private static FuncN argLength = clunk.varagFunc((object[] a) => a.Length);
-        private static FuncN plus10 = clunk.varagFunc(x => (int)x[0] + 10);
-        private static Func1 sqr = clunk.unaryFunc(x => (int)x * (int)x);
-        private static Pred iseven = clunk.unaryFunc(x => (int)x % 2 == 0).asPredicate();
-        private static Func2 mul = clunk.binaryFunc((x, y) => (int)x * (int)y);
-        private static FuncN part = argLength.asPartial(1, 2, null);
+        private static Factory clunk   = new Factory();
+        private static FuncN argLength = new VariadicFunction((object[] a) => a.Length);
+        private static FuncN plus10    = new VariadicFunction(x => (int)x[0] + 10);
+        private static Func1 sqr       = new UnaryFunction(x => (int)x * (int)x);
+        private static Pred iseven     = new UnaryFunction(x => (int)x % 2 == 0).asPredicate();
+        private static Func2 mul       = new BinaryFunction((x, y) => (int)x * (int)y);
+        private static FuncN part      = argLength.asPartial(1, 2, null);
 
 
         // ----------------- Variadic ------------------------------------------

@@ -5,7 +5,7 @@ namespace Clunker
 {
 	using Splat = Func<object[], object>;
 
-	public interface FuncN
+    public interface FuncN
 	{
 		/// <summary>
 		/// Varag wrapper to <see cref="Clunker.Applicable.applyOnArray"/>
@@ -35,7 +35,7 @@ namespace Clunker
 		Func1 tupled();
 	}
 
-	abstract class AbstractFunction : FuncN
+    public abstract class AbstractFunction : FuncN
 	{
 		/// <summary>
 		/// Applies this function to the array of arguments.
@@ -75,7 +75,7 @@ namespace Clunker
 	}
 
 	[ClassInterface(ClassInterfaceType.AutoDual)]
-	class VariadicFunction : AbstractFunction
+	public class VariadicFunction : AbstractFunction
 	{
 		Splat _splat;
 

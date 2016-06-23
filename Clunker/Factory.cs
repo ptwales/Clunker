@@ -64,25 +64,25 @@ namespace Clunker
 			return new None();
 		}
 
-		public FuncN varagFunc(Func<object[], object> s)
-		{
-			return new VariadicFunction(s);
-		}
-
-		public Func1 unaryFunc(Func<object, object> f)
-		{
-			return new UnaryFunction(f);
-		}
-
-		public Func2 binaryFunc(Func<object, object, object> f)
-		{
-			return new BinaryFunction(f);
-		}
-
-		public Pred predicate(Func<object, object> f)
-		{
-			return unaryFunc(f).asPredicate();
-		}
+//		public FuncN varagFunc(Func<object[], object> s)
+//		{
+//			return new VariadicFunction(s);
+//		}
+//
+//		public Func1 unaryFunc(Func<object, object> f)
+//		{
+//			return new UnaryFunction(f);
+//		}
+//
+//		public Func2 binaryFunc(Func<object, object, object> f)
+//		{
+//			return new BinaryFunction(f);
+//		}
+//
+//		public Pred predicate(Func<object, object> f)
+//		{
+//			return unaryFunc(f).asPredicate();
+//		}
 
 		/// <summary>
 		/// Creates an instance of an <see cref="OnArgs"/>.

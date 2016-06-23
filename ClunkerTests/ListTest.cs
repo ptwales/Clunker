@@ -70,7 +70,7 @@ namespace ClunkerTests
         [Test()]
         public void indexWhereTest()
         {
-            Pred p = f.predicate(x => x.Equals(_array[0]));
+            Pred p = new PredFunc(x => x.Equals(_array[0]));
             Assert.AreEqual(0, _list.indexWhere(p).getItem());
         }
 
@@ -84,7 +84,7 @@ namespace ClunkerTests
         [Test()]
         public void lastIndexWhereTest()
         {
-            Pred p = f.predicate(x => x.Equals(_array[0]));
+            Pred p = new PredFunc(x => x.Equals(_array[0]));
             Assert.AreEqual(0, _list.lastIndexWhere(p).getItem());
         }
 
