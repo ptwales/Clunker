@@ -54,7 +54,6 @@
     <Compile Include="Tup.cs" />
     <Compile Include="Iterator.cs" />
     <Compile Include="Iterable.cs" />
-    <Compile Include="Monadic.cs" />
     <Compile Include="Traversable.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

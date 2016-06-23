@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Clunker.Collections
 {
-	public interface Seq : Monadic<Seq>, Iterable, Showable
+	public interface Seq : Iterable, Showable
 	{
 		/// <summary>
 		/// Return the lowest valid index of the sequence.
@@ -85,17 +85,23 @@ namespace Clunker.Collections
 		/// <param name="val">Value sought.</param>
 		Maybe lastIndexOf(object val);
 
-		//Tuple partition(Pred p);
+        Seq map(Func1 f);
 
-		// Seqs of Seqs should use iterators.
-		//Iter scanLeft(object z, Func f);
-		//Iter scanRight(object z, Func f);
-		//Iter inits();
-		//Iter tails();
-		//Iter sliding(int size, int step);
-		//Iter sliding(int size);
-		//Iter grouped(int size);
-	}
+        Seq flatMap(Func1 f);
+
+        Seq filter(Pred p);
+
+        //Tuple partition(Pred p);
+
+        // Seqs of Seqs should use iterators.
+        //Iter scanLeft(object z, Func f);
+        //Iter scanRight(object z, Func f);
+        //Iter inits();
+        //Iter tails();
+        //Iter sliding(int size, int step);
+        //Iter sliding(int size);
+        //Iter grouped(int size);
+    }
 
 	public abstract class AbstractSequence : AbstractIterable, Seq
 	{

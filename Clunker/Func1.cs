@@ -1,6 +1,4 @@
-﻿using System;
-using System.Linq;
-using System.Runtime.InteropServices;
+﻿using System.Runtime.InteropServices;
 
 namespace Clunker
 {
@@ -12,7 +10,7 @@ namespace Clunker
 
 		Pred asPredicate();
 
-		Unary asDelegate();
+        object asDelegate();
 
 		/// <summary>
 		/// Compose another function inside this function.
@@ -86,9 +84,10 @@ namespace Clunker
 			return new PredFunc(this);
 		}
 
-		public virtual Unary asDelegate()
+		public virtual object asDelegate()
 		{
-			return x => this.apply(x);
+			Unary result = x => this.apply(x);
+            return result;
 		}
 	}
 
@@ -107,7 +106,7 @@ namespace Clunker
 			return _unary(arg);
 		}
 
-		public override Unary asDelegate()
+		public override object asDelegate()
 		{
 			return _unary;
 		}

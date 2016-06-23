@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 
 namespace Clunker.Collections
 {
-	using SysList = System.Collections.Generic.List<object>;
+    using SysList = System.Collections.Generic.List<object>;
 
 	[ClassInterface(ClassInterfaceType.AutoDual)]
 	public class List : AbstractSequence
@@ -60,7 +60,7 @@ namespace Clunker.Collections
 
 		public override Seq map(Func1 f)
 		{
-			return new List(_list.Select(f.asDelegate()));
+			return new List(_list.Select((Func<object, object>)f.asDelegate()));
 		}
 
 		public override Seq flatMap(Func1 f)

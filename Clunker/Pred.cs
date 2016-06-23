@@ -8,7 +8,7 @@ namespace Clunker
 
 		Func1 asUnary();
 
-		Predicate<object> asDelegate();
+		object asDelegate();
 	}
 
 	public class PredFunc : Pred
@@ -26,7 +26,7 @@ namespace Clunker
 		}
 
 		public PredFunc(Func1 func)
-			: this(func.asDelegate())
+			: this((Func<object, object>)func.asDelegate())
 		{
 		}
 
@@ -40,7 +40,7 @@ namespace Clunker
 			return new UnaryFunction(x => (object)_pred(x));
 		}
 
-		public Predicate<object> asDelegate()
+		public object asDelegate()
 		{
 			return _pred;
 		}

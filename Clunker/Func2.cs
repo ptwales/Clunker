@@ -9,7 +9,7 @@ namespace Clunker
 	{
 		object apply(object x, object y);
 
-		Accum asDelegate();
+        object asDelegate();
 		//Func1 tupled();
 	}
 
@@ -17,10 +17,11 @@ namespace Clunker
 	{
 		public abstract object apply(object x, object y);
 
-		public virtual Accum asDelegate()
+		public virtual object asDelegate()
 		{
-			return (x, y) => this.apply(x, y);
-		}
+			Accum result = (x, y) => this.apply(x, y);
+            return result; // casting BS
+        }
 
 	}
 
@@ -39,7 +40,7 @@ namespace Clunker
 			return _a(x, y);
 		}
 
-		public override Accum asDelegate()
+		public override object asDelegate()
 		{
 			return _a;
 		}
