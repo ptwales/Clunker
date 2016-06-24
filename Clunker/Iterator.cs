@@ -24,6 +24,7 @@ namespace Clunker.Collections
 		// Methods that must be implemented
 		public abstract bool hasNext();
 		public abstract object next();
+        public abstract IEnumerator GetEnumerator();
 
 		public bool isEmpty()
 		{
@@ -126,6 +127,11 @@ namespace Clunker.Collections
 			_iter = iter;
 			next();
 		}
+
+        override public IEnumerator GetEnumerator()
+        {
+            return _iter;
+        }
 
 		override public bool hasNext() 
 		{

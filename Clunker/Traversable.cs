@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Collections;
 
 namespace Clunker
 {
-    public interface Traversable
+    public interface Traversable : IEnumerable
     {
+
 		/// <summary>
 		/// Check if the object has no elements.
 		/// </summary>

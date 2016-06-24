@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Collections;
 
 namespace Clunker.Collections
 {
@@ -19,6 +19,11 @@ namespace Clunker.Collections
 	public abstract class AbstractIterable : Iterable
 	{
 		public abstract Iterator toIterator();
+
+        public IEnumerator GetEnumerator()
+        {
+            return toIterator().GetEnumerator();
+        }
 
 		public bool isEmpty()
 		{
