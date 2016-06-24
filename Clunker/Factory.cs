@@ -3,6 +3,11 @@ using System.Runtime.InteropServices;
 
 namespace Clunker
 {
+	/// <summary>
+	/// Clunker uses immutable classes that require dependency injection.  Since
+    /// COM doesn't allow constructors with arguments, all objects are created
+    /// by an instance of the factory class.
+	/// </summary>
 	[ClassInterface(ClassInterfaceType.AutoDual)]
 	public class Factory
 	{
@@ -24,7 +29,8 @@ namespace Clunker
 		/// Initializes a new instance of the <see cref="Assoc"/> class,
 		/// where the value is the result of op applied to the key.
 		/// </summary>
-		/// <param name="op">Function to apply to the key to get the value.</param>
+		/// <param name="op">Function to apply to the key to get the value.
+        /// </param>
 		/// <param name="key">Key.</param>
 		public Assoc memeo(FuncN op, object key)
 		{
@@ -38,9 +44,12 @@ namespace Clunker
 		/// <param name="boxed">Object to contain, may be null.</param>
 		public Maybe maybe(object boxed)
 		{
-			if (boxed != null) {
+			if (boxed != null)
+			{
 				return new Some(boxed);
-			} else {
+			}
+			else
+			{
 				return new None();
 			}
 		}
@@ -63,26 +72,6 @@ namespace Clunker
 		{
 			return new None();
 		}
-
-//		public FuncN varagFunc(Func<object[], object> s)
-//		{
-//			return new VariadicFunction(s);
-//		}
-//
-//		public Func1 unaryFunc(Func<object, object> f)
-//		{
-//			return new UnaryFunction(f);
-//		}
-//
-//		public Func2 binaryFunc(Func<object, object, object> f)
-//		{
-//			return new BinaryFunction(f);
-//		}
-//
-//		public Pred predicate(Func<object, object> f)
-//		{
-//			return unaryFunc(f).asPredicate();
-//		}
 
 		/// <summary>
 		/// Creates an instance of an <see cref="OnArgs"/>.

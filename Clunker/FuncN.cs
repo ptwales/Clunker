@@ -5,10 +5,20 @@ namespace Clunker
 {
 	using Splat = Func<object[], object>;
 
+    /// <summary>
+    /// A variadic function.
+    /// </summary>
+    /// <remarks>
+    /// Whereas <see cref="Clunker.Func1"/> and <see cref="Clunker.Func2"/>
+    /// specify their argument count, FuncN covers all other cases as a simple
+    /// variadic function.  That doesn't mean the function it wraps or represent
+    /// really is variadic so Be careful to provide the correct argument count 
+    /// to prevent runtime errors.
+    /// </remarks>
     public interface FuncN
 	{
 		/// <summary>
-		/// Varag wrapper to <see cref="Clunker.Applicable.applyOnArray"/>
+		/// Apply as a variadic function.
 		/// </summary>
 		/// <param name="args">Arguments for the function as <c>params</c>
 		/// </param>
@@ -30,8 +40,21 @@ namespace Clunker
 		/// missing args.</param>
 		FuncN asPartial(params object[] partialArgs);
 
+        /// <summary>
+        /// Returns this function as a <see cref="Clunker.Func1"/>
+        /// </summary>
+        /// <remarks>
+        /// Caution as there is not compile time checks if the contained
+        /// is really an unary function.
+        /// </remarks>
+        /// <returns>The contained function as an unary function.</returns>
 		Func1 asUnary();
 
+        /// <summary>
+        /// Converts this instance into a <see cref="Clunker.Func1"/> that
+        /// expects a <see cref="Clunker.Tuple"/> of args for the variadic
+        /// function.
+        /// </summary>
 		Func1 tupled();
 	}
 

@@ -2,6 +2,9 @@
 
 namespace Clunker
 {
+    /// <summary>
+    /// Simple key value pair.
+    /// </summary>
 	public class Assoc : Showable
 	{
 		private object _key;

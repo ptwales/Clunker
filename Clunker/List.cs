@@ -60,7 +60,7 @@ namespace Clunker.Collections
 
 		public override Seq map(Func1 f)
 		{
-			return new List(_list.Select((Func<object, object>)f.asDelegate()));
+			return new List(_list.Select((Func<object, object>)f.asLambda()));
 		}
 
 		public override Seq flatMap(Func1 f)

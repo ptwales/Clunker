@@ -11,7 +11,6 @@ namespace ClunkerTests
     [TestFixture()]
     public class InternalDelegateTest
     {
-        private Factory factory = new Factory();
 
         [Test()]
         public void identityTest()
