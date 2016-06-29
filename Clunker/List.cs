@@ -21,8 +21,13 @@ namespace Clunker.Collections
 
 		public override Iterator toIterator()
 		{
-			return new Enumerator(_list.GetEnumerator());
+            return new CompatIterator(GetEnumerator());
 		}
+
+        public override System.Collections.IEnumerator GetEnumerator()
+        {
+            return _list.GetEnumerator();
+        }
 
 		// --------------- Seq ---------------------------
 

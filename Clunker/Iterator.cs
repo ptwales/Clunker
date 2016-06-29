@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Clunker.Collections
 {
-    public interface Iterator: Traversable
+    public interface Iterator: TraversableOnce
     {
 		/// <summary>
 		/// Check if there iterator has another value.
@@ -24,7 +24,6 @@ namespace Clunker.Collections
 		// Methods that must be implemented
 		public abstract bool hasNext();
 		public abstract object next();
-        public abstract IEnumerator GetEnumerator();
 
 		public bool isEmpty()
 		{
@@ -116,22 +115,17 @@ namespace Clunker.Collections
 		}
 	}
 
-	class Enumerator: AbstractIterator
+	class CompatIterator: AbstractIterator
 	{
-		private IEnumerator _iter;
-		private object _next;
+        private IEnumerator _iter;
 		private bool _hasNext;
+        private object _next;
 
-		public Enumerator(IEnumerator iter)
+        public CompatIterator(IEnumerator iter)
 		{
-			_iter = iter;
-			next();
+            _iter = iter;
+            next();
 		}
-
-        override public IEnumerator GetEnumerator()
-        {
-            return _iter;
-        }
 
 		override public bool hasNext() 
 		{
@@ -140,10 +134,10 @@ namespace Clunker.Collections
 
 		override public object next()
 		{
-			object current = _next;
-			_hasNext = _iter.MoveNext();
-			_next = _hasNext ? _iter.Current : null;
-			return current;
+            var result = _next;
+            _hasNext = _iter.MoveNext();
+            _next = _hasNext ? _iter.Current : null;
+            return result;
 		}
 	}
 }

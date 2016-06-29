@@ -20,10 +20,7 @@ namespace Clunker.Collections
 	{
 		public abstract Iterator toIterator();
 
-        public IEnumerator GetEnumerator()
-        {
-            return toIterator().GetEnumerator();
-        }
+        public abstract IEnumerator GetEnumerator();
 
 		public bool isEmpty()
 		{
