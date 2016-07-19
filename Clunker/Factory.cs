@@ -8,7 +8,7 @@ namespace Clunker
     /// COM doesn't allow constructors with arguments, all objects are created
     /// by an instance of the factory class.
 	/// </summary>
-	[ClassInterface(ClassInterfaceType.AutoDual)]
+    [ProgId("Clunker.Factory")]
 	public class Factory
 	{
 		public Factory()

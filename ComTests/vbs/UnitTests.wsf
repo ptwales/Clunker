@@ -1,0 +1,8 @@
+<job id="UnitTests">
+    <script language="VBScript" src="Assert.vbs"/>
+    <script language="VBScript" src="Factory.vbs"/>
+    <script language="VBScript" src="AssocTest.vbs"/>
+    <script language="VBScript">
+        AssocMain
+    </script>
+</job>

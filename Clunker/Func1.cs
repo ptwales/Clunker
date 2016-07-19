@@ -117,7 +117,6 @@ namespace Clunker
         }
     }
 
-    [ClassInterface(ClassInterfaceType.AutoDual)]
     public class UnaryFunction : AbstractUnaryFunction
     {
         Unary _unary;
@@ -138,7 +137,7 @@ namespace Clunker
         }
     }
 
-    [ClassInterface(ClassInterfaceType.AutoDual)]
+
     class Composed : AbstractUnaryFunction
     {
         private Func1 _inner;

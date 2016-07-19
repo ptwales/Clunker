@@ -46,7 +46,6 @@ namespace Clunker
 
 	}
 
-	[ClassInterface(ClassInterfaceType.AutoDual)]
     public class BinaryFunction : AbstractBinaryFunction
 	{
 		Accum _a;

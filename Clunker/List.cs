@@ -7,7 +7,6 @@ namespace Clunker.Collections
 {
     using SysList = System.Collections.Generic.List<object>;
 
-	[ClassInterface(ClassInterfaceType.AutoDual)]
 	public class List : AbstractSequence
 	{
 		private SysList _list;
