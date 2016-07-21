@@ -75,19 +75,19 @@ namespace Clunker.Collections
     {
         public abstract IEnumerator GetEnumerator();
 
-        public bool isEmpty()
+        public virtual bool isEmpty()
         {
             return !GetEnumerator().MoveNext();
         }
 
-        public object head()
+        public virtual object head()
         {
             var iter = GetEnumerator();
             iter.MoveNext();
             return iter.Current;
         }
 
-        public object last()
+        public virtual object last()
         {
             var iter = GetEnumerator();
             object result = null;
@@ -112,18 +112,10 @@ namespace Clunker.Collections
 
         public Maybe maybeLast()
         {
-            object result = last();
-            if (result != null)
-            {
-                return new Some(result);
-            }
-            else
-            {
-                return new None();
-            }
+            return Internals.option(last());
         }
 
-        public Maybe find(Pred pred)
+        public virtual Maybe find(Pred pred)
         {
             var iter = GetEnumerator();
             while (iter.MoveNext())
@@ -137,7 +129,7 @@ namespace Clunker.Collections
             return new None();
         }
 
-        public Maybe findLast(Pred pred)
+        public virtual Maybe findLast(Pred pred)
         {
             var iter = GetEnumerator();
             object lastFound = null;
@@ -159,7 +151,7 @@ namespace Clunker.Collections
             }
         }
 
-        public int countWhere(Pred pred)
+        public virtual int countWhere(Pred pred)
         {
             var iter = GetEnumerator();
             int c = 0;
@@ -173,7 +165,7 @@ namespace Clunker.Collections
             return c;
         }
 
-        public object foldLeft(object z, Func2 f)
+        public virtual object foldLeft(object z, Func2 f)
         {
             var iter = GetEnumerator();
             var result = z;
@@ -184,7 +176,7 @@ namespace Clunker.Collections
             return result;
         }
 
-        public object reduceLeft(Func2 f)
+        public virtual object reduceLeft(Func2 f)
         {
             return foldLeft(head(), f);
         }

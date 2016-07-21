@@ -45,8 +45,8 @@ namespace ClunkerTests
         {
             Maybe some = clunk.some(1);
             Maybe none = clunk.none();
-            Assert.AreEqual("Some(1)", some.show());
-            Assert.AreEqual("None()", none.show());
+            Assert.AreEqual("Clunker.Some(1)", some.show());
+            Assert.AreEqual("Clunker.None()", none.show());
         }
 
         //[Test()]
