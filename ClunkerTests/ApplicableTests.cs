@@ -47,7 +47,7 @@ namespace ClunkerTests
         public void testTupled()
         {
             Func1 packed = argLength.tupled();
-            Tup args = clunk.pack(1, 2, 'a');
+            Tup args = clunk.Tup.pack(1, 2, 'a');
             Assert.AreEqual(3, packed.apply(args));
         }
 

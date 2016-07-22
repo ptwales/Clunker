@@ -9,7 +9,7 @@ namespace Clunker.Factories
         /// Maybe will be none if object is null and some otherwise
         /// </summary>
         /// <param name="boxed">Object to contain, may be null.</param>
-        public static Maybe maybe(object boxed)
+        public Maybe maybe(object boxed)
         {
             if (boxed != null)
             {
@@ -26,7 +26,7 @@ namespace Clunker.Factories
         /// Will error if null.
         /// </summary>
         /// <param name="boxed">Non-null object to contain.</param>
-        public static Maybe some(object boxed)
+        public Maybe some(object boxed)
         {
             return new Some(boxed);
         }
@@ -35,7 +35,7 @@ namespace Clunker.Factories
         /// Creates an instance of a <see cref="None"/>.
         /// </summary>
         /// <returns>A <see cref="None"/> object.</returns>
-        public static Maybe none()
+        public Maybe none()
         {
             return new None();
         }

@@ -12,7 +12,7 @@ namespace ClunkerTests
         [Test()]
         public void maybeSomeConstructor()
         {
-            Maybe some = clunk.maybe(0);
+            Maybe some = clunk.Maybe.maybe(0);
             Assert.IsTrue(some.isSome());
             Assert.AreEqual(0, some.getItem());
         }
@@ -20,7 +20,7 @@ namespace ClunkerTests
         [Test()]
         public void maybeNoneConstructor()
         {
-            Maybe none = clunk.maybe(null);
+            Maybe none = clunk.Maybe.maybe(null);
             Assert.IsTrue(none.isNone());
             Assert.AreEqual(12, none.getOrElse(12));
         }
@@ -28,10 +28,10 @@ namespace ClunkerTests
         [Test()]
         public void someConstructor()
         {
-            Maybe some = clunk.some(1);
+            Maybe some = clunk.Maybe.some(1);
             Assert.AreEqual(1, some.getItem());
             try {
-                clunk.some(null);
+                clunk.Maybe.some(null);
                 Assert.Fail("Didn't raise an exception at all.");
             } catch (ArgumentNullException ane) {
                 Assert.Pass("Raised expected exception: " + ane.ToString());
@@ -43,8 +43,8 @@ namespace ClunkerTests
         [Test()]
         public void showingMaybe()
         {
-            Maybe some = clunk.some(1);
-            Maybe none = clunk.none();
+            Maybe some = clunk.Maybe.some(1);
+            Maybe none = clunk.Maybe.none();
             Assert.AreEqual("Clunker.Some(1)", some.show());
             Assert.AreEqual("Clunker.None()", none.show());
         }
