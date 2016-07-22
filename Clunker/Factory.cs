@@ -15,6 +15,7 @@ namespace Clunker
         public readonly MaybeFactory Maybe = new MaybeFactory();
         public readonly AssocFactory Assoc = new AssocFactory();
         public readonly TupFactory Tup = new TupFactory();
+        public readonly SeqFactory Seq = new SeqFactory();
 
 		/// <summary>
 		/// Creates an instance of an <see cref="OnArgs"/>.
@@ -38,15 +39,7 @@ namespace Clunker
 			return new OnObject(method, args);
 		}
 
-		/// <summary>
-		/// Creates a Sequence (<see cref="Seq"/>) containing the given elements.
-		/// </summary>
-		/// <returns>A new Seq</returns>
-		/// <param name="elements">Elements to be contained in the new Sequence.</param>
-		public Collections.Seq seq(params object[] elements)
-		{
-			return new Collections.List(elements);
-		}
+
 	}
 }
 

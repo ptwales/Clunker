@@ -18,7 +18,7 @@ namespace ClunkerTests
         private static int aLower = 0;
         private static int aUpper = _array.Length - 1;
         private static Factory clunk = new Factory();
-        private Seq _list = clunk.seq(_array);
+        private Seq _list = clunk.Seq.seq(_array);
 
         [Test()]
         public void itemTest()
@@ -47,7 +47,7 @@ namespace ClunkerTests
         public void isEmptyTest()
         {
             Assert.IsFalse(_list.isEmpty());
-            Assert.IsTrue(clunk.seq().isEmpty());
+            Assert.IsTrue(clunk.Seq.seq().isEmpty());
         }
 
         [Test()]
@@ -90,8 +90,8 @@ namespace ClunkerTests
 
         [Test()]
         public void forEachTest()
-        {
-            Seq xs = clunk.seq(1, 2, 3, 4, 5);
+        {2
+            Seq xs = clunk.Seq.seq(1, 2, 3, 4, 5);
             int x = (int)xs.head();
             foreach (var el in xs)
             {

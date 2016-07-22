@@ -58,6 +58,7 @@
     <Compile Include="Collection\Iterable.cs" />
     <Compile Include="Collection\Iterator.cs" />
     <Compile Include="Factories\TupFactory.cs" />
+    <Compile Include="Factories\SeqFactory.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
