@@ -90,7 +90,7 @@ namespace ClunkerTests
 
         [Test()]
         public void forEachTest()
-        {2
+        {
             Seq xs = clunk.Seq.seq(1, 2, 3, 4, 5);
             int x = (int)xs.head();
             foreach (var el in xs)
