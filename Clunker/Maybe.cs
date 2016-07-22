@@ -3,7 +3,7 @@ using System.Runtime.InteropServices;
 
 namespace Clunker
 {
-    
+
 	public interface Maybe : Showable
 	{
 		/// <summary>
@@ -38,12 +38,11 @@ namespace Clunker
 		/// <param name="other">Other.</param>
 		object getOrElse(object other);
 
-        Maybe map(Func1 f);
-        Maybe flatMap(Func1 f);
-        Maybe filter(Pred p);
+                Maybe map(Func1 f);
+                Maybe flatMap(Func1 f);
+                Maybe filter(Pred p);
 	}
 
-		
 	class Some : Maybe
 	{
 		/// <summary>
@@ -148,8 +147,12 @@ namespace Clunker
 			return DefShow.showParameters(this, _boxed);
 		}
 	}
+<<<<<<< HEAD
 
 		
+=======
+        	
+>>>>>>> master
 	class None : Maybe
 	{
 		/// <summary>
@@ -227,7 +230,7 @@ namespace Clunker
 		/// </summary>
 		public string show()
 		{
-			return "None()";
+            return DefShow.showParameters(this);
 		}
 	}
 }

@@ -7,12 +7,12 @@ namespace ClunkerTests
     [TestFixture()]
     public class AssocTest
     {
-        private Factory f = new Factory();
+        private Factory clunk = new Factory();
 
         [Test()]
         public void construction()
         {
-            Assoc a = f.assoc("key", "value");
+            Assoc a = clunk.Assoc.assoc("key", "value");
             Assert.AreEqual("key", a.key());
             Assert.AreEqual("value", a.value());
             Assert.AreEqual("key -> value", a.show());
@@ -21,9 +21,9 @@ namespace ClunkerTests
         [Test()]
         public void memeoConstruction()
         {
-            Assoc a = f.assoc('k', 'v');
-            FuncN op = f.onObject("key");
-            Assoc b = f.memeo(op, a);
+            Assoc a  = clunk.Assoc.assoc('k', 'v');
+            Func1 op = clunk.Func1.onObject("key");
+            Assoc b  = clunk.Assoc.memeo(op, a);
             Assert.AreEqual('k', b.value());
         }
     }

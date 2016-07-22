@@ -45,17 +45,22 @@
     <Compile Include="Showable.cs" />
     <Compile Include="CallByName.cs" />
     <Compile Include="Assoc.cs" />
-    <Compile Include="List.cs" />
-    <Compile Include="Seq.cs" />
     <Compile Include="Func1.cs" />
     <Compile Include="Pred.cs" />
     <Compile Include="Func2.cs" />
     <Compile Include="FuncN.cs" />
     <Compile Include="Tup.cs" />
-    <Compile Include="Iterator.cs" />
-    <Compile Include="Iterable.cs" />
-    <Compile Include="Traversable.cs" />
-    <Compile Include="TraversableOnce.cs" />
+    <Compile Include="Factories\AssocFactory.cs" />
+    <Compile Include="Factories\MaybeFactory.cs" />
+    <Compile Include="Collection\Seq.cs" />
+    <Compile Include="Collection\Traversable.cs" />
+    <Compile Include="Collection\List.cs" />
+    <Compile Include="Collection\Iterable.cs" />
+    <Compile Include="Collection\Iterator.cs" />
+    <Compile Include="Factories\TupFactory.cs" />
+    <Compile Include="Factories\SeqFactory.cs" />
+    <Compile Include="Factories\Func1Factory.cs" />
+    <Compile Include="Factories\FuncNFactory.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
@@ -129,4 +134,8 @@
       </Properties>
     </MonoDevelop>
   </ProjectExtensions>
+  <ItemGroup>
+    <Folder Include="Factories\" />
+    <Folder Include="Collection\" />
+  </ItemGroup>
 </Project>

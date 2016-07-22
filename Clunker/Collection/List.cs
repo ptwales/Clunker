@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.InteropServices;
+
+using Clunker.Factories;
 
 namespace Clunker.Collections
 {
@@ -15,6 +16,22 @@ namespace Clunker.Collections
 		{
 			_list = new SysList(sequence);
 		}
+
+        // --------------- Traversable -------------------
+
+        public override Maybe find(Pred pred)
+        {
+            Predicate<object> p = (Predicate<object>) pred.asLambda();
+            object found = _list.Find(p);
+            if (found != null)
+            {
+                return new Some(found);
+            }
+            else
+            {
+                return new None();
+            }
+        }
 
 		// --------------- Iterable ----------------------
 
