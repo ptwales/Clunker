@@ -21,7 +21,16 @@ namespace Clunker.Collections
 
         public override Maybe find(Pred pred)
         {
-            return MaybeFactory.maybe(_list.Find((Predicate<object>)pred.asLambda()));
+            Predicate<object> p = (Predicate<object>) pred.asLambda();
+            object found = _list.Find(p);
+            if (found != null)
+            {
+                return new Some(found);
+            }
+            else
+            {
+                return new None();
+            }
         }
 
 		// --------------- Iterable ----------------------

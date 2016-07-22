@@ -114,7 +114,15 @@ namespace Clunker.Collections
 
         public Maybe maybeLast()
         {
-            return MaybeFactory.maybe(last());
+            object l = last();
+            if (l != null)
+            {
+                return new Some(l);
+            }
+            else
+            {
+                return new None();
+            }
         }
 
         public virtual Maybe find(Pred pred)
