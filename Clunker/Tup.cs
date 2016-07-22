@@ -3,6 +3,9 @@ using System.Runtime.InteropServices;
 
 namespace Clunker
 {
+	/// <summary>
+	/// Tuple object
+	/// </summary>
 	[ClassInterface(ClassInterfaceType.AutoDual)]
 	public class Tup : Showable
 	{
@@ -54,6 +57,7 @@ namespace Clunker
 		 * parameter before assigning it.
 		 */
 
+		// use a preprocessor macro to unpack 3
 		public void unpack(out object a0)
 		{
 			if (_elements.Length == 1) {
