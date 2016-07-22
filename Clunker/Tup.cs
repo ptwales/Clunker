@@ -3,7 +3,7 @@ using System.Runtime.InteropServices;
 
 namespace Clunker
 {
-	[ClassInterface(ClassInterfaceType.AutoDual)]
+	
 	public class Tup : Showable
 	{
 		private object[] _elements;

@@ -97,7 +97,7 @@ namespace Clunker
 		}
 	}
 
-	[ClassInterface(ClassInterfaceType.AutoDual)]
+	
 	public class VariadicFunction : AbstractFunction
 	{
 		Splat _splat;
@@ -113,7 +113,7 @@ namespace Clunker
 		}
 	}
 
-	[ClassInterface(ClassInterfaceType.AutoDual)]
+	
 	class Partial : AbstractFunction
 	{
 		private FuncN _function;

@@ -43,7 +43,7 @@ namespace Clunker
         Maybe filter(Pred p);
 	}
 
-	[ClassInterface(ClassInterfaceType.AutoDual)]	
+		
 	class Some : Maybe
 	{
 		/// <summary>
@@ -149,7 +149,7 @@ namespace Clunker
 		}
 	}
 
-	[ClassInterface(ClassInterfaceType.AutoDual)]	
+		
 	class None : Maybe
 	{
 		/// <summary>
