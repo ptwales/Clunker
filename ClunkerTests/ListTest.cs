@@ -17,8 +17,8 @@ namespace ClunkerTests
         private static object[] _array = new object[] { 'a', "b", 0 };
         private static int aLower = 0;
         private static int aUpper = _array.Length - 1;
-        private static Factory f = new Factory();
-        private Seq _list = f.seq(_array);
+        private static Factory clunk = new Factory();
+        private Seq _list = clunk.seq(_array);
 
         [Test()]
         public void itemTest()
@@ -47,7 +47,7 @@ namespace ClunkerTests
         public void isEmptyTest()
         {
             Assert.IsFalse(_list.isEmpty());
-            Assert.IsTrue(f.seq().isEmpty());
+            Assert.IsTrue(clunk.seq().isEmpty());
         }
 
         [Test()]
@@ -86,6 +86,17 @@ namespace ClunkerTests
         {
             Pred p = new PredFunc(x => x.Equals(_array[0]));
             Assert.AreEqual(0, _list.lastIndexWhere(p).getItem());
+        }
+
+        [Test()]
+        public void forEachTest()
+        {
+            Seq xs = clunk.seq(1, 2, 3, 4, 5);
+            int x = (int)xs.head();
+            foreach (var el in xs)
+            {
+                Assert.AreEqual(x++, el);
+            }
         }
 
     }

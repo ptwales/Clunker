@@ -3,7 +3,7 @@ using System.Runtime.InteropServices;
 
 namespace Clunker
 {
-    
+
 	public interface Maybe : Showable
 	{
 		/// <summary>
@@ -43,7 +43,6 @@ namespace Clunker
         Maybe filter(Pred p);
 	}
 
-	[ClassInterface(ClassInterfaceType.AutoDual)]	
 	class Some : Maybe
 	{
 		/// <summary>
@@ -148,8 +147,7 @@ namespace Clunker
 			return DefShow.showParameters(this, _boxed);
 		}
 	}
-
-	[ClassInterface(ClassInterfaceType.AutoDual)]	
+        	
 	class None : Maybe
 	{
 		/// <summary>
@@ -227,7 +225,7 @@ namespace Clunker
 		/// </summary>
 		public string show()
 		{
-			return "None()";
+            return DefShow.showParameters(this);
 		}
 	}
 }

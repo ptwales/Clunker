@@ -17,12 +17,24 @@ namespace Clunker.Collections
 			_list = new SysList(sequence);
 		}
 
+        // --------------- Traversable -------------------
+
+        public override Maybe find(Pred pred)
+        {
+            return Internals.option(_list.Find((Predicate<object>)pred.asLambda()));
+        }
+
 		// --------------- Iterable ----------------------
 
 		public override Iterator toIterator()
 		{
-			return new Enumerator(_list.GetEnumerator());
+            return new CompatIterator(GetEnumerator());
 		}
+
+        public override System.Collections.IEnumerator GetEnumerator()
+        {
+            return _list.GetEnumerator();
+        }
 
 		// --------------- Seq ---------------------------
 
