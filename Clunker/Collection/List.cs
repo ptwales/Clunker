@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.InteropServices;
+
+using Clunker.Factories;
 
 namespace Clunker.Collections
 {
     using SysList = System.Collections.Generic.List<object>;
 
-	[ClassInterface(ClassInterfaceType.AutoDual)]
 	public class List : AbstractSequence
 	{
 		private SysList _list;
@@ -21,7 +21,7 @@ namespace Clunker.Collections
 
         public override Maybe find(Pred pred)
         {
-            return Internals.option(_list.Find((Predicate<object>)pred.asLambda()));
+            return MaybeFactory.maybe(_list.Find((Predicate<object>)pred.asLambda()));
         }
 
 		// --------------- Iterable ----------------------

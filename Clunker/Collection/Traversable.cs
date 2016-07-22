@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections;
 
+using Clunker.Factories;
+
 namespace Clunker.Collections
 {
     public interface Traversable : IEnumerable
@@ -112,7 +114,7 @@ namespace Clunker.Collections
 
         public Maybe maybeLast()
         {
-            return Internals.option(last());
+            return MaybeFactory.maybe(last());
         }
 
         public virtual Maybe find(Pred pred)

@@ -44,7 +44,7 @@ namespace Clunker
 		}
 	}
 
-	class OnObject : AbstractFunction, Showable
+	class OnObject : AbstractUnaryFunction, Showable
 	{
 		private object[] _args;
 		private string _method;
@@ -67,10 +67,8 @@ namespace Clunker
 		/// </summary>
 		/// <returns>The result of applying the method.</returns>
 		/// <param name="args">An array of a single object.</param>
-		public override object apply(params object[] args)
+		public override object apply(object obj)
 		{
-			// TODO: assert args is size 1;
-			var obj = args[0];
 			Type objType = obj.GetType();
 			MethodInfo method = objType.GetMethod(_method);
 			return method.Invoke(obj, _args);
