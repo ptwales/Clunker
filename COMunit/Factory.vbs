@@ -3,6 +3,6 @@ Private Const FACTORY_OBJECT_NAME = "Clunker.Factory"
 
 Public Function Factory()
 
-    Set Factory = GetObject(DLL, FACTORY_OBJECT_NAME)
+    Set Factory = CreateObject(FACTORY_OBJECT_NAME) ' GetObject(DLL, FACTORY_OBJECT_NAME)
 
 End Function

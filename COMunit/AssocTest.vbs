@@ -1,5 +1,6 @@
 Public Sub AssocMain()
     BasicConstructor
+    Wscript.Echo "Clunker.Assoc passed all tests"
 End Sub
 
 Private Sub BasicConstructor()
@@ -7,8 +8,11 @@ Private Sub BasicConstructor()
     Dim clunk
     Set clunk = Factory()
 
+    Dim assocFactory
+    Set assocFactory = clunk.Assoc
+
     Dim a
-    Set a = clunk.assoc("key", "val")
+    Set a = assocFactory.assoc("key", "val")
 
     Assert a.key = "key", "Key is incorrect"
     Assert a.value = "val", "Value is incorrect"

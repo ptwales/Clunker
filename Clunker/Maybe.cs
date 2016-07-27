@@ -147,12 +147,7 @@ namespace Clunker
 			return DefShow.showParameters(this, _boxed);
 		}
 	}
-<<<<<<< HEAD
 
-		
-=======
-        	
->>>>>>> master
 	class None : Maybe
 	{
 		/// <summary>
