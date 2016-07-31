@@ -1,5 +1,7 @@
 ﻿using NUnit.Framework;
+
 using System;
+using System.Collections;
 
 using Clunker;
 using Clunker.Collections;
@@ -9,7 +11,7 @@ using Clunker.Collections;
  * class that maintains that all seqs follow certain rules.
  */
 
-namespace ClunkerTests
+namespace ClunkerTests.Collection
 {
     [TestFixture()]
     public class ListTest
@@ -18,12 +20,13 @@ namespace ClunkerTests
         private static int aLower = 0;
         private static int aUpper = _array.Length - 1;
         private static Factory clunk = new Factory();
-        private Seq _list = clunk.Seq.seq(_array);
+        private Seq _list = clunk.Seq.make(_array);
 
         [Test()]
         public void itemTest()
         { 
-            for (int i = 0; i <= _array.Length - 1; ++i) {
+            for (int i = 0; i <= _array.Length - 1; ++i)
+            {
                 Assert.AreEqual(_array[i], _list.item(i));
             }
         }
@@ -47,7 +50,7 @@ namespace ClunkerTests
         public void isEmptyTest()
         {
             Assert.IsFalse(_list.isEmpty());
-            Assert.IsTrue(clunk.Seq.seq().isEmpty());
+            Assert.IsTrue(clunk.Seq.make().isEmpty());
         }
 
         [Test()]
@@ -91,7 +94,7 @@ namespace ClunkerTests
         [Test()]
         public void forEachTest()
         {
-            Seq xs = clunk.Seq.seq(1, 2, 3, 4, 5);
+            Seq xs = clunk.Seq.make(1, 2, 3, 4, 5);
             int x = (int)xs.head();
             foreach (var el in xs)
             {

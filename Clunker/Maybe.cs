@@ -38,9 +38,9 @@ namespace Clunker
 		/// <param name="other">Other.</param>
 		object getOrElse(object other);
 
-                Maybe map(Func1 f);
-                Maybe flatMap(Func1 f);
-                Maybe filter(Pred p);
+        Maybe map(Func1 f);
+        Maybe flatMap(Func1 f);
+        Maybe filter(Pred p);
 	}
 
 	class Some : Maybe

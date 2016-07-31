@@ -37,9 +37,10 @@
     <Compile Include="AssocTest.cs" />
     <Compile Include="MaybeTest.cs" />
     <Compile Include="TupleTest.cs" />
-    <Compile Include="ListTest.cs" />
     <Compile Include="InternalDelegateTest.cs" />
     <Compile Include="ApplicableTests.cs" />
+    <Compile Include="Collection\ListTest.cs" />
+    <Compile Include="Collection\TraversableTest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -50,5 +51,8 @@
       <Project>{7F7FF1F0-EFAF-4F17-BE88-03DD03CA017C}</Project>
       <Name>Clunker</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Collection\" />
   </ItemGroup>
 </Project>

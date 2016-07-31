@@ -188,7 +188,19 @@ namespace Clunker.Collections
 
         public virtual object reduceLeft(Func2 f)
         {
-            return foldLeft(head(), f);
+            var iter = GetEnumerator();
+            if (!iter.MoveNext())
+            {
+                throw new InvalidOperationException(
+                    "Cannot reduce on empty sequence");
+            }
+
+            var result = iter.Current;
+            while (iter.MoveNext())
+            {
+                result = f.apply(result, iter.Current);
+            }
+            return result;
         }
     }
 }

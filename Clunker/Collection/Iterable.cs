@@ -5,9 +5,7 @@ namespace Clunker.Collections
 {
     public interface Iterable: Traversable
     {
-		// move almost everything from Seq here.
 		Iterator toIterator();
-
 		//Iterable takeLeft(int n);
 		//Iterable takeRight(int n);
 		//Iterable takeWhile(Pred p);
