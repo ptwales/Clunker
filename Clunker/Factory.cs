@@ -16,7 +16,7 @@ namespace Clunker
         public readonly MaybeFactory Maybe = new MaybeFactory();
         public readonly AssocFactory Assoc = new AssocFactory();
         public readonly TupFactory   Tup   = new TupFactory();
-        public readonly SeqFactory   Seq   = new SeqFactory(); 
+        //public readonly SeqFactory   Seq   = new SeqFactory(); 
         public readonly Func1Factory Func1 = new Func1Factory();
         public readonly FuncNFactory FuncN = new FuncNFactory();
         public readonly ListFactory  List  = new ListFactory();

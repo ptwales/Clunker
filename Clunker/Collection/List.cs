@@ -2,11 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 
-using Clunker.Factories;
-
 namespace Clunker.Collections
 {
-    using SysList = System.Collections.Generic.List<object>;
+    using SysList = List<object>;
 
 	public class List : AbstractSequence
 	{

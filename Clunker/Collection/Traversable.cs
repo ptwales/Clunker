@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections;
 
-using Clunker.Factories;
-
 namespace Clunker.Collections
 {
     public interface Traversable : IEnumerable
@@ -77,19 +75,19 @@ namespace Clunker.Collections
     {
         public abstract IEnumerator GetEnumerator();
 
-        public virtual bool isEmpty()
+        public bool isEmpty()
         {
             return !GetEnumerator().MoveNext();
         }
 
-        public virtual object head()
+        public object head()
         {
             var iter = GetEnumerator();
             iter.MoveNext();
             return iter.Current;
         }
 
-        public virtual object last()
+        public object last()
         {
             var iter = GetEnumerator();
             object result = null;
@@ -139,7 +137,7 @@ namespace Clunker.Collections
             return new None();
         }
 
-        public virtual Maybe findLast(Pred pred)
+        public Maybe findLast(Pred pred)
         {
             var iter = GetEnumerator();
             object lastFound = null;
@@ -161,7 +159,7 @@ namespace Clunker.Collections
             }
         }
 
-        public virtual int countWhere(Pred pred)
+        public int countWhere(Pred pred)
         {
             var iter = GetEnumerator();
             int c = 0;
@@ -175,7 +173,7 @@ namespace Clunker.Collections
             return c;
         }
 
-        public virtual object foldLeft(object z, Func2 f)
+        public object foldLeft(object z, Func2 f)
         {
             var iter = GetEnumerator();
             var result = z;
@@ -186,7 +184,7 @@ namespace Clunker.Collections
             return result;
         }
 
-        public virtual object reduceLeft(Func2 f)
+        public object reduceLeft(Func2 f)
         {
             var iter = GetEnumerator();
             if (!iter.MoveNext())

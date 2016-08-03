@@ -1,4 +1,4 @@
-﻿using System;
+﻿using Clunker.Collections;
 
 namespace Clunker.Factories
 {
@@ -11,9 +11,9 @@ namespace Clunker.Factories
         /// <returns>A new Seq</returns>
         /// <param name="elements">Elements to be contained in the new Sequence.
         /// </param>
-        public Collections.Seq make(params object[] elements)
+        public Seq make(params object[] elements)
         {
-            return new Collections.List(elements);
+            return new List(elements);
         }
     }
 }

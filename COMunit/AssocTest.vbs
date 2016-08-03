@@ -14,6 +14,7 @@ Private Sub BasicConstructor()
     Dim a
     Set a = assocFactory.assoc("key", "val")
 
+    Wscript.Echo a.show
     Assert a.key = "key", "Key is incorrect"
     Assert a.value = "val", "Value is incorrect"
 

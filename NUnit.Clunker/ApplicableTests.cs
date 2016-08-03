@@ -36,11 +36,12 @@ namespace ClunkerTests
                 "Without null field");
         }
 
-        [ExpectedException(typeof(ArgumentException))]
-        public void testPartialErrors()
-        {
-            Assert.AreEqual(3, part.apply(2, 3));
-        }
+//        [Test()]
+//        public void testPartialErrors()
+//        {
+//            Assert.That(() => part.apply(2, 3).Equals(3),
+//                Throws.TypeOf<ArgumentException>);
+//        }
 
         [Test()]
         public void testTupled()

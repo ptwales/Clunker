@@ -1,8 +1,38 @@
+<!--
+    _Well this is how unit tests are done for COM..._
+I'm aware of COM unit testing frameworks like COMUnit and ScriptUnit.
+But both are rather old, unmaintained and take time to setup compared
+to just executing this file.
+
+## Run Down:
+
+Assert.vbs: Contains the `Assert` method that will display message if the
+assertion is false.  Maybe in the future it will expand to an actual class like
+JUnit.
+
+Factory.vbs: Contains the `Factory` method that returns an instance of the
+`Clunker.Factory` object which is used to create all Clunker objects.
+
+    All other scripts are the actual tests of specific classes.  They are as
+primative as this framework is.  Usually, they should just check if the object
+can even be created over COM and check if the fundamental methods work.
+To add a test file:
+
+  - create the test file called `<ClassName>Test.vbs`
+  - In that file, create `<ClassName>Main`
+  - Add the file as the rest have been below
+  - call the main function as the rest have been below
+
+Those are just the guidelines, it can be as dynamic as needed but please keep
+it simple.
+-->
 <job id="UnitTests">
     <script language="VBScript" src="Assert.vbs"/>
     <script language="VBScript" src="Factory.vbs"/>
     <script language="VBScript" src="AssocTest.vbs"/>
+    <script language="VBScript" src="ListTest.vbs"/>
     <script language="VBScript">
         AssocMain
+        ListMain
     </script>
 </job>

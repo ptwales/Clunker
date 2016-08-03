@@ -1,4 +1,4 @@
-﻿using System;
+﻿using Clunker.Collections;
 
 namespace Clunker.Factories
 {
@@ -11,9 +11,9 @@ namespace Clunker.Factories
         /// <returns>A new List</returns>
         /// <param name="elements">Elements to be contained in the new List.
         /// </param>
-        public Collections.List make(params object[] elements)
+        public List make(params object[] elements)
         {
-            return new Collections.List(elements);
+            return new List(elements);
         }
     }
 }
